@@ -148,7 +148,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
   Widget? get prefixIcon {
     var prefix = this.prefix;
-    var prefixPadding = this.prefixPadding ?? EdgeInsets.symmetric(horizontal: getPadding.horizontal/2);
+    var padding = EdgeInsets.symmetric(horizontal: getPadding.horizontal/2);
+    if(underlineBordered ?? false) padding = EdgeInsets.only(right: 12);
+    var prefixPadding = this.prefixPadding ?? padding;
 
     return prefix != null ? Padding(
       padding: prefixPadding,
@@ -166,7 +168,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   
   Widget? get suffixIcon {
     var suffix = this.suffix;
-    var suffixPadding = this.suffixPadding ?? EdgeInsets.symmetric(horizontal: getPadding.horizontal/2);
+    var padding = EdgeInsets.symmetric(horizontal: getPadding.horizontal/2);
+    if(underlineBordered ?? false) padding = EdgeInsets.only(right: 12);
+    var suffixPadding = this.suffixPadding ?? padding;
 
     if(isStepper ?? false) {
       suffix = Column(
