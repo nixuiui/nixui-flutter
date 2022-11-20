@@ -218,7 +218,10 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var backgroundColor = this.backgroundColor ?? NxColor.input.background;
+    var backgroundColorDefault = NxColor.input.background;
+    if(underlineBordered ?? false) backgroundColorDefault = Colors.transparent;
+    var backgroundColor = this.backgroundColor ?? backgroundColorDefault;
+
     var textColor = this.textColor ?? NxColor.input.text;
     var hintColor = this.hintColor?? NxColor.input.hintText;
 
