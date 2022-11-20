@@ -62,7 +62,7 @@ class _NxButtonBasic extends StatelessWidget {
     var fontSize = this.fontSize ?? Theme.of(context).textTheme.bodyText1!.fontSize!;
     var fontWeight = this.fontWeight ?? Theme.of(context).textTheme.bodyText1!.fontWeight!;
     
-    var defaultPadding = EdgeInsets.symmetric(vertical: 8, horizontal: 12);
+    var defaultPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 12);
     var padding = this.padding ?? defaultPadding;
     
     var itemSpace = padding.horizontal/4;
@@ -215,7 +215,7 @@ class NxButton extends _NxButtonBasic {
     super.outlined,
   }) : super(
     fontSize: 10,
-    padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
   );
   
   NxButton.medium({
@@ -236,7 +236,7 @@ class NxButton extends _NxButtonBasic {
     super.outlined,
   }) : super(
     fontSize: 14,
-    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
   );
   
   NxButton.large({
@@ -257,7 +257,7 @@ class NxButton extends _NxButtonBasic {
     super.outlined,
   }) : super(
     fontSize: 18,
-    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
   );
   
   const NxButton.square({
