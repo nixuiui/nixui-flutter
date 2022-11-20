@@ -43,7 +43,7 @@ class NxCheckbox extends StatelessWidget {
             decoration: BoxDecoration(
               color: checked ? (color ?? NxColor.primary) : Colors.transparent,
               border: Border.all(
-                color: checked ? (color ?? NxColor.primary) : borderColor ?? Color(0xffBAC7D5), 
+                color: checked ? (color ?? NxColor.primary) : borderColor ?? NxColor.border, 
                 width: borderSize ?? 1
               ),
               borderRadius: BorderRadius.circular(borderRadius ?? 4),

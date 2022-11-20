@@ -42,6 +42,7 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
             SizedBox(height: 16),
             NxTextFormField(
               label: NxText.small('Number'),
+              textColor: Colors.green,
               inputType: TextInputType.number,
             ),
             SizedBox(height: 16),
@@ -80,6 +81,14 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
               label: NxText.small('Disabled'),
               controller: TextEditingController()..text = 'user@gmail.com',
               enable: false,
+            ),
+            SizedBox(height: 16),
+            NxTextFormField(
+              label: NxText.small('Disabled Readonly'),
+              controller: TextEditingController()..text = 'user@gmail.com',
+              enable: false,
+              readonly: 
+              true,
             ),
             SizedBox(height: 16),
             NxTextFormField(

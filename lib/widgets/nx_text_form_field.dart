@@ -139,7 +139,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   }
 
   Color get getBorderColor {
-    var borderColor = this.borderColor ?? Colors.grey[300]!;
+    var borderColor = this.borderColor ?? NxColor.border;
     if(errorText != '') {
       borderColor = NxColor.error;
     }
@@ -155,9 +155,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       child: Theme(
         data: ThemeData(
           iconTheme: IconThemeData(
-            color: textColor,
+            color: NxColor.input.prefix,
             size: fontSize,
-          )
+          ),
         ), 
         child: prefix
       ),
@@ -191,9 +191,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       child: Theme(
         data: ThemeData(
           iconTheme: IconThemeData(
-            color: textColor,
+            color: NxColor.input.suffix,
             size: fontSize,
-          )
+          ),
         ), 
         child: suffix
       ),
@@ -218,15 +218,15 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var backgroundColor = this.backgroundColor;
-    var textColor = this.textColor ?? Colors.black87;
-    var hintColor = this.hintColor?? textColor.withOpacity(0.5);
+    var backgroundColor = this.backgroundColor ?? NxColor.input.background;
+    var textColor = this.textColor ?? NxColor.input.text;
+    var hintColor = this.hintColor?? NxColor.input.hintText;
 
     var labelSpace = this.labelSpace ?? 8;
 
     if(!enable) {
-      textColor = Colors.grey;
-      backgroundColor = Colors.grey[100];
+      textColor = NxColor.input.disabledText;
+      backgroundColor = NxColor.input.disabledBackground;
     }
     
     if(readonly) {
@@ -284,13 +284,11 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
           items: dropdownItems?.map<DropdownMenuItem<T>>((T value) {
             return DropdownMenuItem<T>(
               value: value,
-              child: Expanded(
-                child: Text(
-                  dropdownValueLabel != null ? dropdownValueLabel!(value) : '',
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: textStyle(color: textColor),
-                ),
+              child: Text(
+                dropdownValueLabel != null ? dropdownValueLabel!(value) : '',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: textStyle(color: textColor),
               ),
             );
           }).toList() ?? [],
@@ -307,17 +305,13 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
           padding: EdgeInsets.only(bottom: labelSpace),
           child: label,
         ) : SizedBox(),
-        Theme(
-          data: ThemeData(
-            
-          ), 
-          child: Container(
-            decoration: BoxDecoration(
-              color: backgroundColor ?? Colors.transparent,
-              boxShadow: boxShadow,
-            ),
-            child: formField,
+        Container(
+          decoration: BoxDecoration(
+            color: backgroundColor,
+            borderRadius: BorderRadius.circular(borderRadius),
+            boxShadow: boxShadow,
           ),
+          child: formField,
         ),
 
         // Error Text

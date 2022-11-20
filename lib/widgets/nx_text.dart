@@ -201,7 +201,7 @@ class _NxTextBasic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var defaultColor = NxColor.textColor;
+    var defaultColor = NxColor.text;
     if(onPressed != null) {
       defaultColor = NxColor.primary;
     }

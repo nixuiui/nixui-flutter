@@ -1,33 +1,50 @@
 part of 'theme.dart';
 
-class _NxColor {
-  Color primary = Color(0xff8c88ff);
-  Color accent = Color(0xff4fe3c2);
-  Color error = Color(0xffff3366);
-  Color warning = Color(0xffffd807);
-  Color info = Color(0xff4b90e2);
-  Color success = Color(0xff7ed321);
+class NxInputColor {
   
-  Color textColor = Colors.black87;
-}
+  Color? text;
+  Color? hintText;
+  Color? suffix;
+  Color? prefix;
+  Color? background;
+  Color? disabledText;
+  Color? disabledBackground;
+  Color? border;
 
-var _nxColor = _NxColor();
+  NxInputColor({
+    this.text,
+    this.hintText,
+    this.suffix,
+    this.prefix,
+    this.background,
+    this.disabledText,
+    this.disabledBackground,
+    this.border,
+  });
+
+}
 
 class NxColor {
   
-  static Color get primary => _nxColor.primary;
+  static Color get primary => _nxColor.primary!;
+  static Color get accent => _nxColor.accent!;
+  static Color get error => _nxColor.error!;
+  static Color get warning => _nxColor.warning!;
+  static Color get info => _nxColor.info!;
+  static Color get success => _nxColor.success!;
+  static Color get text => _nxColor.text!;
+  static Color get border => _nxColor.border!;
   
-  static Color get accent => _nxColor.accent;
-  
-  static Color get error => _nxColor.error;
-  
-  static Color get warning => _nxColor.warning;
-  
-  static Color get info => _nxColor.info;
-  
-  static Color get success => _nxColor.success;
-  
-  static Color get textColor => _nxColor.textColor;
+  static NxInputColor get input => NxInputColor(
+    text: _nxColor.input!.text,
+    hintText: _nxColor.input!.hintText,
+    suffix: _nxColor.input!.suffix,
+    prefix: _nxColor.input!.prefix,
+    background: _nxColor.input!.background,
+    disabledText: _nxColor.input!.disabledText,
+    disabledBackground: _nxColor.input!.disabledBackground,
+    border: _nxColor.input!.border,
+  );
 
 }
 

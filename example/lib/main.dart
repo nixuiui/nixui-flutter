@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:nixui/themes/theme.dart';
 
 void main() {
-  NxTheme.init();
   runApp(const MyApp());
 }
 
