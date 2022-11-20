@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:nixui/themes/theme.dart';
 import 'package:nixui/widgets/nx_text.dart';
 
-class _NxTextFormFieldBasic extends StatelessWidget {
+class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
   final Widget? label;
   final double? labelSpace;
@@ -34,6 +34,12 @@ class _NxTextFormFieldBasic extends StatelessWidget {
   final MainAxisAlignment? valign;
   final bool? underlineBordered;
   final bool? isStepper;
+  final bool? isDropdown;
+  final List<T>? dropdownItems;
+  final T? dropdownValue;
+  final String Function(T)? dropdownValueLabel;
+  final Function(T?)? dropdownOnChanged;
+  final Function()? onTap;
   
   const _NxTextFormFieldBasic({
     Key? key,
@@ -76,6 +82,12 @@ class _NxTextFormFieldBasic extends StatelessWidget {
     this.lineHeight,
     this.valign,
     this.isStepper = false,
+    this.isDropdown,
+    this.dropdownItems,
+    this.dropdownValue,
+    this.dropdownValueLabel,
+    this.dropdownOnChanged,
+    this.onTap,
   }) :  assert(successText == '' || errorText ==''), 
         super(key: key);
 
@@ -83,7 +95,15 @@ class _NxTextFormFieldBasic extends StatelessWidget {
     var defaultPadding = (underlineBordered ?? false) 
         ? EdgeInsets.symmetric(vertical: 12) 
         : EdgeInsets.symmetric(vertical: 12, horizontal: 16);
+    
+    if(isDropdown ?? false) {
+      defaultPadding = (underlineBordered ?? false) 
+          ? EdgeInsets.symmetric(vertical: 7) 
+          : EdgeInsets.symmetric(vertical: 7, horizontal: 16);
+    }
+    
     var padding = this.padding ?? defaultPadding;
+
     return padding;
   }
 
@@ -162,6 +182,8 @@ class _NxTextFormFieldBasic extends StatelessWidget {
           ),
         ],
       );
+    } else if(isDropdown ?? false) {
+      suffix ??= Icon(Icons.keyboard_arrow_down_rounded);
     }
 
     return suffix != null ? Padding(
@@ -211,6 +233,72 @@ class _NxTextFormFieldBasic extends StatelessWidget {
       textColor = this.textColor ?? Colors.black87;
     }
 
+    var inputDecoration = InputDecoration(
+      contentPadding: getPadding,
+      isCollapsed: true,
+      hintText: hintText,
+      border: border(color: getBorderColor),
+      focusedBorder: border(color: NxColor.primary),
+      enabledBorder: border(color: getBorderColor),
+      hintStyle: textStyle(color: hintColor),
+      prefixIconConstraints: BoxConstraints(maxWidth: 100),
+      prefixIcon: prefixIcon,
+      suffixIconConstraints: BoxConstraints(maxWidth: 100),
+      suffixIcon: suffixIcon,
+    );
+
+    Widget formField = TextFormField(
+      onTap: onTap,
+      controller: controller,
+      focusNode: focusNode,
+      textInputAction: inputAction,
+      onFieldSubmitted: onFieldSubmitted,
+      inputFormatters: getInputFormatters,
+      cursorColor: textColor,
+      enabled: enable,
+      readOnly: readonly,
+      onChanged: onChanged,
+      style: textStyle(color: textColor),
+      obscureText: obsecure,
+      keyboardType: inputType,
+      validator: validator,
+      maxLines: maxLines,
+      minLines: minLines,
+      decoration: inputDecoration,
+    );
+
+    if(isDropdown ?? false) {
+      formField = DropdownButtonHideUnderline(
+        child: DropdownButtonFormField<T>(
+          value: dropdownValue,
+          icon: Visibility (visible:false, child: Icon(Icons.arrow_downward)),
+          style: textStyle(color: textColor),
+          decoration: inputDecoration,
+          hint: Text(
+            hintText,
+            style: textStyle(color: hintColor),
+          ),
+          isExpanded: true,
+          isDense: true,
+          onChanged: enable ? dropdownOnChanged?.call : null,
+          items: dropdownItems?.map<DropdownMenuItem<T>>((T value) {
+            return DropdownMenuItem<T>(
+              value: value,
+              child: Expanded(
+                child: Text(
+                  dropdownValueLabel != null ? dropdownValueLabel!(value) : '',
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: textStyle(color: textColor),
+                ),
+              ),
+            );
+          }).toList() ?? [],
+          focusNode: focusNode,
+        ),
+      );
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: valign ?? MainAxisAlignment.center,
@@ -228,43 +316,7 @@ class _NxTextFormFieldBasic extends StatelessWidget {
               color: backgroundColor ?? Colors.transparent,
               boxShadow: boxShadow,
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: TextFormField(
-                    controller: controller,
-                    focusNode: focusNode,
-                    textInputAction: inputAction,
-                    onFieldSubmitted: onFieldSubmitted,
-                    inputFormatters: getInputFormatters,
-                    cursorColor: textColor,
-                    enabled: enable,
-                    readOnly: readonly,
-                    onChanged: onChanged,
-                    style: textStyle(color: textColor),
-                    obscureText: obsecure,
-                    keyboardType: inputType,
-                    validator: validator,
-                    maxLines: maxLines,
-                    minLines: minLines,
-                    decoration: InputDecoration(
-                      contentPadding: getPadding,
-                      isCollapsed: true,
-                      hintText: hintText,
-                      border: border(color: getBorderColor),
-                      focusedBorder: border(color: NxColor.primary),
-                      enabledBorder: border(color: getBorderColor),
-                      hintStyle: textStyle(color: hintColor),
-                      prefixIconConstraints: BoxConstraints(maxWidth: 100),
-                      prefixIcon: prefixIcon,
-                      suffixIconConstraints: BoxConstraints(maxWidth: 100),
-                      suffixIcon: suffixIcon,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            child: formField,
           ),
         ),
 
@@ -325,7 +377,7 @@ class _NxTextFormFieldBasic extends StatelessWidget {
 
 }
 
-class NxTextFormField extends _NxTextFormFieldBasic {
+class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
 
   const NxTextFormField({
     super.key,
@@ -366,8 +418,47 @@ class NxTextFormField extends _NxTextFormFieldBasic {
     super.minLines,
     super.lineHeight,
     super.valign,
-    super.underlineBordered
+    super.underlineBordered,
+    super.onTap,
   }) : super();
+
+  const NxTextFormField.dropdownList({
+    super.key,
+    super.label,
+    super.labelSpace,
+    super.borderRadius,
+    super.padding,
+    super.prefix,
+    super.prefixPadding,
+    super.suffix,
+    super.suffixPadding,
+    super.errorIcon,
+    super.successIcon,
+    super.obsecure,
+    super.hintText,
+    super.errorText,
+    super.successText,
+    super.backgroundColor,
+    super.borderColor,
+    super.textColor,
+    super.hintColor,
+    super.fontSize,
+    super.fontWeight,
+    super.focusNode,
+    super.enable,
+    super.boxShadow,
+    super.underlineBordered,
+    List<T>? items,
+    T? value,
+    String Function(T)? valueLabel,
+    Function(T?)? onChanged,
+  }) : super(
+    isDropdown: true,
+    dropdownValue: value,
+    dropdownItems: items,
+    dropdownValueLabel: valueLabel,
+    dropdownOnChanged: onChanged,
+  );
   
   const NxTextFormField.stepper({
     super.key,

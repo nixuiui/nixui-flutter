@@ -16,6 +16,12 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
   var controller = TextEditingController();
   var result = '';
 
+  final options = <String>[
+    'Messi',
+    'Cristiano Ronaldo Eloko gonxales Eloko gonxales ',
+  ];
+  String? selected;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -95,13 +101,23 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
               controller: TextEditingController()..text = '',
             ),
             SizedBox(height: 16),
+            NxTextFormField<String>.dropdownList(
+              items: options,
+              value: selected,
+              hintText: 'Select Favorit Player',
+              valueLabel: (v) => v,
+              onChanged:(v) {
+                setState(() => selected = v);
+              },
+            ),
+            SizedBox(height: 16),
             NxCheckbox(
               size: 20,
               checked: checked,
               space: 12,
               onTap: (val) => setState(() => checked = !checked),
               child: NxText('sss'),
-            )
+            ),
           ],
         ),
       ),
