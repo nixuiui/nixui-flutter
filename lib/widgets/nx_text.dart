@@ -257,8 +257,6 @@ class _NxTextBasic extends StatelessWidget {
     // ```monospace text```
 
     final map = {
-      r'@.\w+': const TextStyle(color: Colors.blue),
-      r'#.\w+': const TextStyle(color: Colors.blue),
       r'\*\*(.*?)\*\*': const TextStyle(fontWeight: FontWeight.bold),
       r'__(.*?)__': const TextStyle(fontStyle: FontStyle.italic),
       '~~(.*?)~~': const TextStyle(decoration: TextDecoration.lineThrough),
@@ -281,23 +279,17 @@ class _NxTextBasic extends StatelessWidget {
         String? textPattern;
         final patterns = map.keys.toList();
         if (RegExp(patterns[0]).hasMatch(match[0]!)) {
-          formattedText = match[0];
+          formattedText = match[0]!.replaceAll('**', '');
           textPattern = patterns[0];
         } else if (RegExp(patterns[1]).hasMatch(match[0]!)) {
-          formattedText = match[0];
+          formattedText = match[0]!.replaceAll('__', '');
           textPattern = patterns[1];
         } else if (RegExp(patterns[2]).hasMatch(match[0]!)) {
-          formattedText = match[0]!.replaceAll('**', '');
+          formattedText = match[0]!.replaceAll('~~', '');
           textPattern = patterns[2];
         } else if (RegExp(patterns[3]).hasMatch(match[0]!)) {
-          formattedText = match[0]!.replaceAll('__', '');
-          textPattern = patterns[3];
-        } else if (RegExp(patterns[4]).hasMatch(match[0]!)) {
-          formattedText = match[0]!.replaceAll('~~', '');
-          textPattern = patterns[4];
-        } else if (RegExp(patterns[5]).hasMatch(match[0]!)) {
           formattedText = match[0]!.replaceAll('```', '');
-          textPattern = patterns[5];
+          textPattern = patterns[3];
         }
         children.add(TextSpan(
           text: formattedText,
