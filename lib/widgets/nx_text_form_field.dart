@@ -3,6 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:nixui/themes/theme.dart';
 import 'package:nixui/widgets/nx_text.dart';
 
+enum NxInputType { 
+  dropdown, 
+  date, 
+  stepper, 
+}
+
 class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
   final Widget? label;
@@ -12,7 +18,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final Color? backgroundColor, borderColor;
   final FocusNode? focusNode;
   final TextEditingController? controller;
-  final TextInputType inputType;
+  final TextInputType keyboardType;
+  final NxInputType? inputType;
   final FormFieldValidator<String>? validator;
   final List<TextInputFormatter>? inputFormatters;
   final String hintText, validatorText;
@@ -33,12 +40,13 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final double? lineHeight;
   final MainAxisAlignment? valign;
   final bool? underlineBordered;
-  final bool? isStepper;
-  final bool? isDropdown;
   final List<T>? dropdownItems;
   final T? dropdownValue;
-  final String Function(T)? dropdownValueLabel;
+  final String Function(T)? dropdownValueText;
   final Function(T?)? dropdownOnChanged;
+  final DateTime? initialDate, firstDate, lastDate;
+  final Function(DateTime?)? dateChanged;
+  final String Function(DateTime)? dateValueText;
   final Function()? onTap;
   
   const _NxTextFormFieldBasic({
@@ -59,7 +67,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.errorText = '',
     this.successText = '',
     this.validatorText = '',
-    this.inputType = TextInputType.text,
+    this.keyboardType = TextInputType.text,
+    this.inputType,
     this.controller,
     this.validator,
     this.borderRadius = 8,
@@ -82,12 +91,15 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.minLines,
     this.lineHeight,
     this.valign,
-    this.isStepper = false,
-    this.isDropdown,
     this.dropdownItems,
     this.dropdownValue,
-    this.dropdownValueLabel,
+    this.dropdownValueText,
     this.dropdownOnChanged,
+    this.initialDate,
+    this.firstDate,
+    this.lastDate,
+    this.dateChanged,
+    this.dateValueText,
     this.onTap,
   }) :  assert(successText == '' || errorText ==''), 
         super(key: key);
@@ -97,7 +109,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
         ? EdgeInsets.symmetric(vertical: 12) 
         : EdgeInsets.symmetric(vertical: 12, horizontal: 16);
     
-    if(isDropdown ?? false) {
+    if(inputType == NxInputType.dropdown) {
       defaultPadding = (underlineBordered ?? false) 
           ? EdgeInsets.symmetric(vertical: 7) 
           : EdgeInsets.symmetric(vertical: 7, horizontal: 16);
@@ -109,7 +121,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   }
 
   TextStyle textStyle({Color? color}) {
-    var lineHeight = this.lineHeight ?? (inputType == TextInputType.multiline ? 1.5 : 1);
+    var lineHeight = this.lineHeight ?? (keyboardType == TextInputType.multiline ? 1.5 : 1);
 
     return TextStyle(
       color: color,
@@ -166,7 +178,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
         data: ThemeData(
           iconTheme: IconThemeData(
             color: NxColor.input.prefix,
-            size: fontSize,
+            size: 18,
           ),
         ), 
         child: prefix
@@ -187,7 +199,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       );
     }
 
-    if(isStepper ?? false) {
+    if(inputType == NxInputType.stepper) {
       suffix = Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -202,7 +214,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
           ),
         ],
       );
-    } else if(isDropdown ?? false) {
+    } else if(inputType == NxInputType.dropdown) {
       suffix ??= Icon(Icons.keyboard_arrow_down_rounded);
     }
 
@@ -223,7 +235,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   List<TextInputFormatter>? get getInputFormatters {
     List<TextInputFormatter>? formaters = inputFormatters;
 
-    if(isStepper ?? false) formaters = <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly];
+    if(inputType == NxInputType.stepper) formaters = <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly];
 
     return formaters;
   }
@@ -256,6 +268,23 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       textColor = this.textColor ?? Colors.black87;
     }
 
+    var onTap = this.onTap;
+    var controller = this.controller;
+    
+    var date = initialDate ?? DateTime.now();
+    if(inputType == NxInputType.date) {
+      var dateString = '${date.year}/${date.month}/${date.day}';
+      if(dateValueText != null) {
+        dateString = dateValueText != null ? dateValueText!(date) : '';
+      }
+
+      controller = TextEditingController()..text = dateString;
+      onTap = () async {
+        final newDate = await _getDate(context, date);
+        dateChanged?.call(newDate);
+      };
+    }
+
     var inputDecoration = InputDecoration(
       contentPadding: getPadding,
       isCollapsed: true,
@@ -283,14 +312,14 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       onChanged: onChanged,
       style: textStyle(color: textColor),
       obscureText: obsecure,
-      keyboardType: inputType,
+      keyboardType: keyboardType,
       validator: validator,
       maxLines: maxLines,
       minLines: minLines,
       decoration: inputDecoration,
     );
 
-    if(isDropdown ?? false) {
+    if(inputType == NxInputType.dropdown) {
       formField = DropdownButtonHideUnderline(
         child: DropdownButtonFormField<T>(
           value: dropdownValue,
@@ -308,7 +337,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
             return DropdownMenuItem<T>(
               value: value,
               child: Text(
-                dropdownValueLabel != null ? dropdownValueLabel!(value) : '',
+                dropdownValueText != null ? dropdownValueText!(value) : '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: textStyle(color: textColor),
@@ -392,6 +421,25 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     );
   }
 
+  Future<DateTime?> _getDate(BuildContext context, DateTime initialDate) async {
+    final picker = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: firstDate ?? DateTime(1950),
+      lastDate: lastDate ?? DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(primary: NxColor.primary)
+          ),
+          child: child!,
+        );
+      }
+    );
+
+    return picker;
+  }
+
 }
 
 class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
@@ -415,7 +463,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.errorText,
     super.successText,
     super.validatorText,
-    super.inputType,
+    super.keyboardType,
     super.controller,
     super.validator,
     super.backgroundColor,
@@ -471,10 +519,10 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     String Function(T)? valueLabel,
     Function(T?)? onChanged,
   }) : super(
-    isDropdown: true,
+    inputType: NxInputType.dropdown,
     dropdownValue: value,
     dropdownItems: items,
-    dropdownValueLabel: valueLabel,
+    dropdownValueText: valueLabel,
     dropdownOnChanged: onChanged,
   );
   
@@ -513,8 +561,8 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.valign,
     super.underlineBordered
   }) : super(
-    isStepper: true,
-    inputType: TextInputType.number,
+    inputType: NxInputType.stepper,
+    keyboardType: TextInputType.number,
   );
 
   const NxTextFormField.multiLine({
@@ -549,7 +597,45 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.lineHeight,
     super.underlineBordered
   }) : super(
-    inputType: TextInputType.multiline,
+    keyboardType: TextInputType.multiline,
+  );
+
+  const NxTextFormField.date({
+    super.key,
+    super.label,
+    super.labelSpace,
+    super.borderRadius,
+    super.padding,
+    super.prefix = const Icon(Icons.calendar_month),
+    super.prefixPadding,
+    super.prefixClicked,
+    super.suffix,
+    super.suffixPadding,
+    super.suffixClicked,
+    super.errorIcon,
+    super.successIcon,
+    super.hintText,
+    super.errorText,
+    super.successText,
+    super.backgroundColor,
+    super.borderColor,
+    super.textColor,
+    super.hintColor,
+    super.fontSize,
+    super.fontWeight,
+    super.focusNode,
+    super.enable,
+    Function(DateTime?)? onChanged,
+    super.initialDate,
+    super.firstDate,
+    super.lastDate,
+    super.dateValueText,
+    super.boxShadow,
+    super.underlineBordered,
+  }) : super(
+    readonly: true,
+    dateChanged: onChanged,
+    inputType: NxInputType.date,
   );
 
 }

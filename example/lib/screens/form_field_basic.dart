@@ -15,6 +15,7 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
   var checked = true;
   var controller = TextEditingController();
   var result = '';
+  var date = DateTime.now();
 
   final options = <String>[
     'Messi',
@@ -43,12 +44,20 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
             NxTextFormField(
               label: NxText.small('Number'),
               textColor: Colors.green,
-              inputType: TextInputType.number,
+              keyboardType: TextInputType.number,
+            ),
+            SizedBox(height: 16),
+            NxTextFormField.date(
+              label: NxText.small('Calendar'),
+              initialDate: date,
+              onChanged: (date) => setState(() => this.date = date ?? this.date),
+              dateValueText: (date) => '${date.year}-${date.month}-${date.day}',
+              lastDate: DateTime.now().add(Duration(days: 365)),
             ),
             SizedBox(height: 16),
             NxTextFormField(
               label: NxText.small('Email'),
-              inputType: TextInputType.emailAddress,
+              keyboardType: TextInputType.emailAddress,
               prefix: Icon(
                 Icons.email,
                 size: 18,
@@ -57,7 +66,7 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
             SizedBox(height: 16),
             NxTextFormField(
               label: NxText.small('Password'),
-              inputType: TextInputType.visiblePassword,
+              keyboardType: TextInputType.visiblePassword,
               controller: TextEditingController()..text = 'password',
               obsecure: obsecure,
               prefix: Icon(
