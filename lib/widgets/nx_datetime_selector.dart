@@ -7,7 +7,7 @@ class _NxDateTimeSelectorBasic extends StatelessWidget {
 
   final Widget child;
   final DateTimeSelection dateTimeSelection;
-  final DateTime? initialDate;
+  final DateTime? initialDate, firstDate, lastDate;
   final Function(DateTime)? dateChanged;
   final DateTime? startDate;
   final DateTime? endDate;
@@ -21,6 +21,8 @@ class _NxDateTimeSelectorBasic extends StatelessWidget {
     required this.dateTimeSelection,
     required this.child,
     this.initialDate,
+    this.firstDate,
+    this.lastDate,
     this.dateChanged,
     this.startDate,
     this.endDate,
@@ -38,8 +40,8 @@ class _NxDateTimeSelectorBasic extends StatelessWidget {
     final picker = await showDateRangePicker(
       context: context,
       initialDateRange: DateTimeRange(start: startDate, end: endDate),
-      firstDate: DateTime(1950),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      firstDate: firstDate ?? DateTime(1950),
+      lastDate: lastDate ?? DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -57,8 +59,8 @@ class _NxDateTimeSelectorBasic extends StatelessWidget {
     final picker = await showDatePicker(
       context: context,
       initialDate: initialDate ?? DateTime.now(),
-      firstDate: DateTime(1950),
-      lastDate: DateTime.now(),
+      firstDate: firstDate ?? DateTime(1950),
+      lastDate: lastDate ?? DateTime.now(),
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -136,6 +138,8 @@ class NxDateTimeSelector extends _NxDateTimeSelectorBasic {
     super.key,
     super.startDate,
     super.endDate,
+    super.firstDate,
+    super.lastDate,
     super.dateRangeChanged,
     required super.child
   }) : super(
@@ -145,6 +149,8 @@ class NxDateTimeSelector extends _NxDateTimeSelectorBasic {
   const NxDateTimeSelector.date({
     super.key,
     super.initialDate,
+    super.firstDate,
+    super.lastDate,
     super.dateChanged,
     required super.child
   }) : super(
