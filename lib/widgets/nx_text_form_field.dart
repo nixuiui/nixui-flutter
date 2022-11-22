@@ -21,7 +21,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final FontWeight fontWeight;
   final Widget? prefix, suffix;
   final EdgeInsetsGeometry? prefixPadding, suffixPadding;
-  final VoidCallback? suffixClicked;
+  final VoidCallback? prefixClicked, suffixClicked;
   final bool obsecure, enable, readonly;
   final Widget? errorIcon, successIcon;
   final String errorText, successText;
@@ -48,6 +48,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.padding,
     this.prefix,
     this.prefixPadding,
+    this.prefixClicked,
     this.suffix,
     this.suffixPadding,
     this.suffixClicked,
@@ -152,6 +153,13 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     if(underlineBordered ?? false) padding = EdgeInsets.only(right: 12);
     var prefixPadding = this.prefixPadding ?? padding;
 
+    if(prefixClicked != null) {
+      prefix = GestureDetector(
+        onTap: prefixClicked,
+        child: prefix,
+      );
+    }
+
     return prefix != null ? Padding(
       padding: prefixPadding,
       child: Theme(
@@ -172,17 +180,25 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     if(underlineBordered ?? false) padding = EdgeInsets.only(right: 12);
     var suffixPadding = this.suffixPadding ?? padding;
 
+    if(suffixClicked != null) {
+      suffix = GestureDetector(
+        onTap: suffixClicked,
+        child: suffix,
+      );
+    }
+
     if(isStepper ?? false) {
       suffix = Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           GestureDetector(
             onTap: () => changeStepperValue(1),
-            child: Icon(Icons.arrow_drop_up),
+            child: Icon(Icons.expand_less),
           ),
           GestureDetector(
             onTap: () => changeStepperValue(-1),
-            child: Icon(Icons.arrow_drop_down),
+            child: Icon(Icons.expand_more),
           ),
         ],
       );
@@ -388,6 +404,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.padding,
     super.prefix,
     super.prefixPadding,
+    super.prefixClicked,
     super.suffix,
     super.suffixPadding,
     super.suffixClicked,
