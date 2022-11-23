@@ -292,6 +292,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       border: border(color: getBorderColor),
       focusedBorder: border(color: NxColor.primary),
       enabledBorder: border(color: getBorderColor),
+      disabledBorder: border(color: getBorderColor),
+      errorBorder: border(color: getBorderColor),
       hintStyle: textStyle(color: hintColor),
       prefixIconConstraints: BoxConstraints(maxWidth: 100),
       prefixIcon: prefixIcon,

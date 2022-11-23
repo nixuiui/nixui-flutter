@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nixui/widgets/nx_box.dart';
-import 'package:nixui/widgets/nx_card.dart';
-import 'package:nixui/widgets/nx_text.dart';
+import 'package:nixui/widgets/nixui.dart';
 
 class CardScreen extends StatefulWidget {
   const CardScreen({ Key? key }) : super(key: key);

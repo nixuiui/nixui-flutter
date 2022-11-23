@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:yaru_color_generator/yaru_color_generator.dart';
 
 part '_colors.dart';
 part 'colors.dart';
@@ -6,7 +7,8 @@ part 'colors.dart';
 class NxTheme {
   NxTheme.setupBaseColor({
     Color? primary,
-    Color? accent,
+    Color? secondary,
+    Color? tertiary,
     Color? error,
     Color? warning,
     Color? info,
@@ -15,7 +17,8 @@ class NxTheme {
     Color? border,
   }) {
     _nxColor.primary = primary ?? _nxColor.primary;
-    _nxColor.accent = accent ?? _nxColor.accent;
+    _nxColor.secondary = secondary ?? _nxColor.secondary;
+    _nxColor.tertiary = tertiary ?? _nxColor.tertiary;
     _nxColor.error = error ?? _nxColor.error;
     _nxColor.warning = warning ?? _nxColor.warning;
     _nxColor.info = info ?? _nxColor.info;

@@ -1,6 +1,7 @@
 import 'package:example/screens/box_screen.dart';
 import 'package:example/screens/button.dart';
 import 'package:example/screens/card_screen.dart';
+import 'package:example/screens/color.dart';
 import 'package:example/screens/date_time_selector.dart';
 import 'package:example/screens/selectable_list.dart';
 import 'package:example/screens/text.dart';
@@ -24,6 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
         { 'title': 'Box',  'screen': BoxScreen()},
         { 'title': 'Button',  'screen': ButtonScreen()},
         { 'title': 'Card',  'screen': CardScreen()},
+        { 'title': 'Color',  'screen': ColorScreen()},
         { 'title': 'Date Time Selector',  'screen': DateTimeSelectorScreen()},
         { 'title': 'Form Field',  'screen': FormFieldScreen()},
         { 'title': 'Selectable List',  'screen': SelectableListScreen()},

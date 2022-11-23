@@ -14,7 +14,8 @@ class _ButtonScreenState extends State<ButtonScreen> {
 
   final variants = <Map<String, dynamic>>[
     {"color": NxColor.primary, "label": "Primary"},
-    {"color": NxColor.accent, "label": "Accent"},
+    {"color": NxColor.secondary, "label": "secondary"},
+    {"color": NxColor.tertiary, "label": "tertiary"},
     {"color": NxColor.info, "label": "Info"},
     {"color": NxColor.success, "label": "Success"},
     {"color": NxColor.warning, "label": "Warning"},
