@@ -24,6 +24,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final String hintText, validatorText;
   final Color? textColor, hintColor;
+  final TextAlign? textAlign;
   final double fontSize;
   final FontWeight fontWeight;
   final Widget? prefix, suffix;
@@ -76,6 +77,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.underlineBordered = false,
     this.borderColor,
     this.textColor,
+    this.textAlign,
     this.hintColor,
     this.inputFormatters,
     this.fontSize = 14,
@@ -285,6 +287,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       };
     }
 
+    var textAlign = this.textAlign ?? TextAlign.start;
+
     var inputDecoration = InputDecoration(
       contentPadding: getPadding,
       isCollapsed: true,
@@ -319,6 +323,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       maxLines: maxLines,
       minLines: minLines,
       decoration: inputDecoration,
+      textAlign: textAlign,
     );
 
     if(inputType == NxInputType.dropdown) {
@@ -331,6 +336,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
           hint: Text(
             hintText,
             style: textStyle(color: hintColor),
+            textAlign: textAlign,
           ),
           isExpanded: true,
           isDense: true,
@@ -472,6 +478,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.borderColor,
     super.textColor,
     super.hintColor,
+    super.textAlign,
     super.inputFormatters,
     super.fontSize,
     super.fontWeight,
@@ -503,6 +510,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.errorIcon,
     super.successIcon,
     super.obsecure,
+    super.textAlign,
     super.hintText,
     super.errorText,
     super.successText,
@@ -617,6 +625,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.errorIcon,
     super.successIcon,
     super.hintText,
+    super.textAlign,
     super.errorText,
     super.successText,
     super.backgroundColor,
