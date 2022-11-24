@@ -9,6 +9,8 @@ part '_brand.dart';
 part 'brand.dart';
 part '_input_field.dart';
 part 'input_field.dart';
+part '_button.dart';
+part 'button.dart';
 
 class NxTheme {
   NxTheme.setupBaseColor({
@@ -31,7 +33,6 @@ class NxTheme {
     _nxColor.border = border ?? _nxColor.border;
   }
   
-
   NxTheme.setupInputFielldTheme({
     EdgeInsetsGeometry? padding,
     EdgeInsetsGeometry? underlinedPadding,
@@ -71,6 +72,53 @@ class NxTheme {
       disabledText: disabledTextColor ?? _nxInputFieldTheme.color?.disabledText,
       disabledBackground: disabledBackgroundColor ?? _nxInputFieldTheme.color?.disabledBackground,
       border: borderColor ?? _nxInputFieldTheme.color?.border,
+    );
+  }
+
+  NxTheme.setupButtonTheme({
+    EdgeInsetsGeometry? padding,
+    FontWeight? fontWeight,
+    double? fontSize,
+    double? radius,
+    double? borderSize,
+    double? squareButtonSize,
+    double? fontSizeSmallButton,
+    double? fontSizeMediumButton,
+    double? fontSizeLargeButton,
+    EdgeInsetsGeometry? paddingSmallButton,
+    EdgeInsetsGeometry? paddingMediumButton,
+    EdgeInsetsGeometry? paddingLargeButton,
+    Color? textColor,
+    Color? backgroundColor,
+    Color? disabledBackgroundColor,
+    Color? borderColor,
+    Color? iconColor,
+  }) {
+    _nxButtonTheme.padding = padding ?? _nxButtonTheme.padding;
+    _nxButtonTheme.fontWeight = fontWeight ?? _nxButtonTheme.fontWeight;
+    _nxButtonTheme.fontSize = fontSize ?? _nxButtonTheme.fontSize;
+    _nxButtonTheme.radius = radius ?? _nxButtonTheme.radius;
+    _nxButtonTheme.borderSize = borderSize ?? _nxButtonTheme.borderSize;
+    _nxButtonTheme.squareButton?.width = squareButtonSize ?? _nxButtonTheme.squareButton?.width;
+    _nxButtonTheme.squareButton?.height = squareButtonSize ?? _nxButtonTheme.squareButton?.height;
+    _nxButtonTheme.smallButton = _NxButtonTheme(
+      fontSize: fontSize ?? _nxButtonTheme.smallButton?.fontSize,
+      padding: padding ?? _nxButtonTheme.smallButton?.padding,
+    );
+    _nxButtonTheme.mediumButton = _NxButtonTheme(
+      fontSize: fontSize ?? _nxButtonTheme.mediumButton?.fontSize,
+      padding: padding ?? _nxButtonTheme.mediumButton?.padding,
+    );
+    _nxButtonTheme.largeButton = _NxButtonTheme(
+      fontSize: fontSize ?? _nxButtonTheme.largeButton?.fontSize,
+      padding: padding ?? _nxButtonTheme.largeButton?.padding,
+    );
+    _nxButtonTheme.color = _NxButtonColor(
+      text: textColor ?? _nxButtonTheme.color?.text,
+      background: backgroundColor ?? _nxButtonTheme.color?.background,
+      disabledBackground: disabledBackgroundColor ?? _nxButtonTheme.color?.disabledBackground,
+      border: borderColor ?? _nxButtonTheme.color?.border,
+      icon: iconColor ?? _nxButtonTheme.color?.icon,
     );
   }
 

@@ -9,6 +9,7 @@ class _NxButtonBasic extends StatelessWidget {
   final VoidCallback? onPressed;
   final double? width;
   final double? height;
+  final double? borderSize;
   final EdgeInsetsGeometry? padding;
   final Color? color;
   final Color? borderColor;
@@ -30,6 +31,7 @@ class _NxButtonBasic extends StatelessWidget {
     this.onPressed,
     this.width,
     this.height,
+    this.borderSize,
     this.padding,
     this.color,
     this.borderColor,
@@ -47,22 +49,24 @@ class _NxButtonBasic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var color = this.color ?? NxColor.primary;
-    var textColor =  this.textColor ?? Colors.white;
-    var iconColor = this.iconColor ?? textColor;
-    var borderColor = this.borderColor ?? color;
+    var color = this.color ?? NxButtonTheme.color.background!;
+    var textColor =  this.textColor ?? NxButtonTheme.color.text!;
+    var iconColor = this.iconColor ?? NxButtonTheme.color.icon!;
+    var borderColor = this.borderColor ?? (this.color ?? NxButtonTheme.color.border!);
 
     if(outlined) {
       textColor =  this.textColor ?? color;
       iconColor = this.iconColor ?? textColor;
       borderColor = this.borderColor ?? color;
-      color = Colors.white;
+      color = NxButtonTheme.color.text!;
     }
 
-    var fontSize = this.fontSize ?? Theme.of(context).textTheme.bodyText1!.fontSize!;
-    var fontWeight = this.fontWeight ?? Theme.of(context).textTheme.bodyText1!.fontWeight!;
+    var fontSize = this.fontSize ?? NxButtonTheme.fontSize;
+    var fontWeight = this.fontWeight ?? NxButtonTheme.fontWeight;
+    var borderSize = this.borderSize ?? NxButtonTheme.borderSize;
+    var radius = this.radius ?? NxButtonTheme.radius;
     
-    var defaultPadding = EdgeInsets.symmetric(vertical: 10, horizontal: 12);
+    var defaultPadding = NxButtonTheme.padding;
     var padding = this.padding ?? defaultPadding;
     
     var itemSpace = padding.horizontal/4;
@@ -93,10 +97,10 @@ class _NxButtonBasic extends StatelessWidget {
             elevation: elevation,
             shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(radius ?? 6),
+              borderRadius: BorderRadius.circular(radius),
               side: BorderSide(
                 color: !enabled ? borderColor.light : borderColor, 
-                width: 1
+                width: borderSize
               ),
             ),
             textStyle: TextStyle(
@@ -185,6 +189,7 @@ class NxButton extends _NxButtonBasic {
     super.onPressed,
     super.width,
     super.padding,
+    super.borderSize,
     super.color,
     super.borderColor,
     super.iconColor,
@@ -203,6 +208,7 @@ class NxButton extends _NxButtonBasic {
     super.fontWeight,
     super.onPressed,
     super.width,
+    super.borderSize,
     super.color,
     super.borderColor,
     super.iconColor,
@@ -214,8 +220,8 @@ class NxButton extends _NxButtonBasic {
     super.isLoading,
     super.outlined,
   }) : super(
-    fontSize: 10,
-    padding: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+    fontSize: NxButtonTheme.fontSizeSmallButton,
+    padding: NxButtonTheme.paddingSmallButton,
   );
   
   NxButton.medium({
@@ -224,6 +230,7 @@ class NxButton extends _NxButtonBasic {
     super.fontWeight,
     super.onPressed,
     super.width,
+    super.borderSize,
     super.color,
     super.borderColor,
     super.iconColor,
@@ -235,8 +242,8 @@ class NxButton extends _NxButtonBasic {
     super.isLoading,
     super.outlined,
   }) : super(
-    fontSize: 14,
-    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+    fontSize: NxButtonTheme.fontSizeMediumButton,
+    padding: NxButtonTheme.paddingMediumButton,
   );
   
   NxButton.large({
@@ -245,6 +252,7 @@ class NxButton extends _NxButtonBasic {
     super.fontWeight,
     super.onPressed,
     super.width,
+    super.borderSize,
     super.color,
     super.borderColor,
     super.iconColor,
@@ -256,14 +264,15 @@ class NxButton extends _NxButtonBasic {
     super.isLoading,
     super.outlined,
   }) : super(
-    fontSize: 18,
-    padding: EdgeInsets.symmetric(vertical: 14, horizontal: 20),
+    fontSize: NxButtonTheme.fontSizeLargeButton,
+    padding: NxButtonTheme.paddingLargeButton,
   );
   
-  const NxButton.square({
+  NxButton.square({
     super.key,
     super.text,
     super.onPressed,
+    super.borderSize,
     super.color,
     super.borderColor,
     super.iconColor,
@@ -276,8 +285,8 @@ class NxButton extends _NxButtonBasic {
     double? size,
     super.padding = EdgeInsets.zero,
   }) : super(
-    width: size ?? 32,
-    height: size ?? 32,
+    width: size ?? NxButtonTheme.squareButtonSize,
+    height: size ?? NxButtonTheme.squareButtonSize,
   );
 
 }

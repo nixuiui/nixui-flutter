@@ -49,3 +49,27 @@ class NxInputFieldTheme {
   );
 
 }
+
+class NxInputColor {
+  
+  Color? text;
+  Color? hintText;
+  Color? suffix;
+  Color? prefix;
+  Color? background;
+  Color? disabledText;
+  Color? disabledBackground;
+  Color? border;
+
+  NxInputColor({
+    this.text,
+    this.hintText,
+    this.suffix,
+    this.prefix,
+    this.background,
+    this.disabledText,
+    this.disabledBackground,
+    this.border,
+  });
+
+}
