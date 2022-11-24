@@ -1,4 +1,5 @@
 import 'package:example/screens/box_screen.dart';
+import 'package:example/screens/brand_screen.dart';
 import 'package:example/screens/button.dart';
 import 'package:example/screens/card_screen.dart';
 import 'package:example/screens/color.dart';
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
       
       var menu = const [
         { 'title': 'Box',  'screen': BoxScreen()},
+        { 'title': 'Brand',  'screen': BrandScreen()},
         { 'title': 'Button',  'screen': ButtonScreen()},
         { 'title': 'Card',  'screen': CardScreen()},
         { 'title': 'Color',  'screen': ColorScreen()},

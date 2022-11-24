@@ -13,7 +13,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
   final Widget? label;
   final double? labelSpace;
-  final double borderRadius;
+  final double? borderRadius;
   final EdgeInsetsGeometry? padding;
   final Color? backgroundColor, borderColor;
   final FocusNode? focusNode;
@@ -25,8 +25,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final String hintText, validatorText;
   final Color? textColor, hintColor;
   final TextAlign? textAlign;
-  final double fontSize;
-  final FontWeight fontWeight;
+  final double? fontSize;
+  final FontWeight? fontWeight;
   final Widget? prefix, suffix;
   final EdgeInsetsGeometry? prefixPadding, suffixPadding;
   final VoidCallback? prefixClicked, suffixClicked;
@@ -72,7 +72,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.inputType,
     this.controller,
     this.validator,
-    this.borderRadius = 8,
+    this.borderRadius,
     this.backgroundColor,
     this.underlineBordered = false,
     this.borderColor,
@@ -80,8 +80,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.textAlign,
     this.hintColor,
     this.inputFormatters,
-    this.fontSize = 14,
-    this.fontWeight = FontWeight.w400,
+    this.fontSize,
+    this.fontWeight,
     this.inputAction,
     this.onFieldSubmitted,
     this.focusNode,
@@ -108,13 +108,13 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
   EdgeInsetsGeometry get getPadding {
     var defaultPadding = (underlineBordered ?? false) 
-        ? EdgeInsets.symmetric(vertical: 12) 
-        : EdgeInsets.symmetric(vertical: 12, horizontal: 16);
+        ? NxInputFieldTheme.underlinedPadding 
+        : NxInputFieldTheme.padding;
     
     if(inputType == NxInputType.dropdown) {
       defaultPadding = (underlineBordered ?? false) 
-          ? EdgeInsets.symmetric(vertical: 7) 
-          : EdgeInsets.symmetric(vertical: 7, horizontal: 16);
+          ? NxInputFieldTheme.dropdownUnderlinedPadding 
+          : NxInputFieldTheme.dropdownPadding;
     }
     
     var padding = this.padding ?? defaultPadding;
@@ -122,30 +122,46 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     return padding;
   }
 
+  FontWeight get getFontWeight {
+    return fontWeight ?? NxInputFieldTheme.fontWeight;
+  }
+
+  double get getFontSize {
+    return fontSize ?? NxInputFieldTheme.fontSize;
+  }
+
+  double get getBorderRadius {
+    return borderRadius ?? NxInputFieldTheme.radius;
+  }
+
+  double get getLabelSpace {
+    return labelSpace ?? NxInputFieldTheme.labelSpace;
+  }
+
   TextStyle textStyle({Color? color}) {
     var lineHeight = this.lineHeight ?? (keyboardType == TextInputType.multiline ? 1.5 : 1);
 
     return TextStyle(
       color: color,
-      fontSize: fontSize,
-      fontWeight: fontWeight,
+      fontSize: getFontSize,
+      fontWeight: getFontWeight,
       height: lineHeight,
     );
   }
 
-  InputBorder border({Color? color}) {
+  InputBorder border({required Color color}) {
     InputBorder border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(borderRadius),
+      borderRadius: BorderRadius.circular(getBorderRadius),
       borderSide: BorderSide(
-        color: color ?? Colors.grey[300]!,
+        color: color,
       ),
     );
 
     if(underlineBordered ?? false) {
       border = UnderlineInputBorder(
-        borderRadius: BorderRadius.circular(borderRadius),
+        borderRadius: BorderRadius.circular(getBorderRadius),
         borderSide: BorderSide(
-          color: color ?? Colors.grey[300]!,
+          color: color,
         ),
       );
     }
@@ -179,8 +195,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       child: Theme(
         data: ThemeData(
           iconTheme: IconThemeData(
-            color: NxColor.input.prefix,
-            size: 18,
+            color: NxInputFieldTheme.color.prefix,
+            size: NxInputFieldTheme.iconSize,
           ),
         ), 
         child: prefix
@@ -225,8 +241,8 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       child: Theme(
         data: ThemeData(
           iconTheme: IconThemeData(
-            color: NxColor.input.suffix,
-            size: fontSize,
+            color: NxInputFieldTheme.color.suffix,
+            size: getFontSize,
           ),
         ), 
         child: suffix
@@ -252,18 +268,16 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var backgroundColorDefault = NxColor.input.background;
+    var backgroundColorDefault = NxInputFieldTheme.color.background;
     if(underlineBordered ?? false) backgroundColorDefault = Colors.transparent;
     var backgroundColor = this.backgroundColor ?? backgroundColorDefault;
 
-    var textColor = this.textColor ?? NxColor.input.text;
-    var hintColor = this.hintColor?? NxColor.input.hintText;
-
-    var labelSpace = this.labelSpace ?? 8;
+    var textColor = this.textColor ?? NxInputFieldTheme.color.text;
+    var hintColor = this.hintColor?? NxInputFieldTheme.color.hintText;
 
     if(!enable) {
-      textColor = NxColor.input.disabledText;
-      backgroundColor = NxColor.input.disabledBackground;
+      textColor = NxInputFieldTheme.color.disabledText;
+      backgroundColor = NxInputFieldTheme.color.disabledBackground;
     }
     
     if(readonly) {
@@ -362,14 +376,14 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       mainAxisAlignment: valign ?? MainAxisAlignment.center,
       children: <Widget>[
         (label != null) ? Container(
-          padding: EdgeInsets.only(bottom: labelSpace),
+          padding: EdgeInsets.only(bottom: getLabelSpace),
           child: label,
         ) : SizedBox(),
         Container(
           decoration: BoxDecoration(
             color: backgroundColor,
-            borderRadius: BorderRadius.circular(borderRadius),
-            boxShadow: boxShadow,
+            borderRadius: BorderRadius.circular(getBorderRadius),
+            boxShadow: NxInputFieldTheme.boxShadow,
           ),
           child: formField,
         ),
@@ -386,7 +400,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
                   data: ThemeData(
                     iconTheme: IconThemeData(
                       color: NxColor.error.dark,
-                      size: fontSize,
+                      size: getFontSize,
                     )
                   ), 
                   child: errorIcon!
@@ -412,7 +426,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
                   data: ThemeData(
                     iconTheme: IconThemeData(
                       color: NxColor.success.dark,
-                      size: fontSize,
+                      size: getFontSize,
                     )
                   ), 
                   child: successIcon!

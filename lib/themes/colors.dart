@@ -8,18 +8,7 @@ var _nxColor = _NxColor(
   warning: Color(0xffff8601),
   info: Color(0xff14a4ee),
   success: Color(0xff7ed321),
-  text: Color(0xff0c0e32),
   border: Color(0xffc9d0db),
-  input: _NxInputColor(
-    text: Color(0xff0c0e32),
-    background: Color(0xffffffff),
-    hintText: Color(0xff606770),
-    suffix: Color(0xff6e6e72),
-    prefix: Color(0xff6e6e72),
-    disabledText: Color(0xff98a1ac),
-    disabledBackground: Color(0xffe5e9ef),
-    border: Color(0xffc9d0db),
-  )
 );
 
 Color? _hexToColor(String hexColor) {
@@ -136,19 +125,7 @@ class NxColor {
   static Color get success800 => _color(_nxColor.success!.value)[800]!;
   static Color get success900 => _color(_nxColor.success!.value)[900]!;
 
-  static Color get text => _nxColor.text!;
   static Color get border => _nxColor.border!;
-  
-  static NxInputColor get input => NxInputColor(
-    text: _nxColor.input!.text,
-    hintText: _nxColor.input!.hintText,
-    suffix: _nxColor.input!.suffix,
-    prefix: _nxColor.input!.prefix,
-    background: _nxColor.input!.background,
-    disabledText: _nxColor.input!.disabledText,
-    disabledBackground: _nxColor.input!.disabledBackground,
-    border: _nxColor.input!.border,
-  );
 
 }
 
