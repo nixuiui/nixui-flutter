@@ -18,15 +18,15 @@ class NxTheme {
     Color? text,
     Color? border,
   }) {
-    _nxColor.primary ??= primary;
-    _nxColor.secondary ??= secondary;
-    _nxColor.tertiary ??= tertiary;
-    _nxColor.error ??= error;
-    _nxColor.warning ??= warning;
-    _nxColor.info ??= info;
-    _nxColor.success ??= success;
-    _nxColor.text ??= text;
-    _nxColor.border ??= border;
+    _nxColor.primary = primary ?? _nxColor.primary;
+    _nxColor.secondary = secondary ?? _nxColor.secondary;
+    _nxColor.tertiary = tertiary ?? _nxColor.tertiary;
+    _nxColor.error = error ?? _nxColor.error;
+    _nxColor.warning = warning ?? _nxColor.warning;
+    _nxColor.info = info ?? _nxColor.info;
+    _nxColor.success = success ?? _nxColor.success;
+    _nxColor.text = text ?? _nxColor.text;
+    _nxColor.border = border ?? _nxColor.border;
   }
   
   NxTheme.setupInputColor({
@@ -54,6 +54,6 @@ class NxTheme {
   NxTheme.setupTextTheme({
     String? fontFamily,
   }) {
-    _nxTextTheme.fontFamily ??= fontFamily;
+    _nxTextTheme.fontFamily = fontFamily ?? _nxTextTheme.fontFamily;
   }
 }
