@@ -26,11 +26,12 @@ Color? _hexToColor(String hexColor) {
   Colors.accents;
   hexColor = hexColor.replaceAll("#", "");
   if (hexColor.length == 6) {
-    hexColor = "FF" + hexColor;
+    hexColor = "FF$hexColor";
   }
   if (hexColor.length == 8) {
     return Color(int.parse("0x$hexColor"));
   }
+  return null;
 }
 
 Map<int, Color> _color(int colorCode) {

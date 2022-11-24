@@ -25,6 +25,7 @@ extension NxTextStyleExtention on NxTextStyle {
     TextDecoration? decoration,
     TextOverflow? overflow,
     FontStyle? fontStyle,
+    String? fontFamily,
   }) {
     TextStyle? textStyle;
     
@@ -38,6 +39,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.headline2:
@@ -49,6 +51,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.headline3:
@@ -60,6 +63,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.headline4:
@@ -71,6 +75,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.headline5:
@@ -82,6 +87,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.headline6:
@@ -93,6 +99,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.bodyLight:
@@ -104,6 +111,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.body:
@@ -115,6 +123,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.bodyMedium:
@@ -126,6 +135,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.small:
@@ -137,6 +147,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.extraSmall:
@@ -148,6 +159,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       case NxTextStyle.caption:
@@ -159,6 +171,7 @@ extension NxTextStyleExtention on NxTextStyle {
           decoration: decoration,
           overflow: overflow,
           fontStyle: fontStyle,
+          fontFamily: fontFamily,
         );
         break;
       default:
@@ -182,6 +195,7 @@ class _NxTextBasic extends StatelessWidget {
   final TextOverflow? overflow;
   final FontStyle? fontStyle;
   final NxTextStyle? nxTextStyle;
+  final String? fontFamily;
 
   const _NxTextBasic(this.text, {
     Key? key,
@@ -196,6 +210,7 @@ class _NxTextBasic extends StatelessWidget {
     this.overflow,
     this.fontStyle,
     this.nxTextStyle,
+    this.fontFamily,
   }) : super(key: key);
 
   @override
@@ -213,6 +228,7 @@ class _NxTextBasic extends StatelessWidget {
       overflow: overflow,
       decoration: decoration,
       fontStyle: fontStyle,
+      fontFamily: fontFamily,
     );
 
     textStyle ??= TextStyle(
@@ -223,6 +239,7 @@ class _NxTextBasic extends StatelessWidget {
       decoration: decoration,
       overflow: overflow,
       fontStyle: fontStyle,
+      fontFamily: fontFamily,
     );
 
     Widget textWidget = RichText(
@@ -323,6 +340,7 @@ class NxText extends _NxTextBasic {
     super.decoration,
     super.overflow,
     super.fontStyle,
+    super.fontFamily,
   }) : super(
     text,
   );
@@ -335,6 +353,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -349,6 +368,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -363,6 +383,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -377,6 +398,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -391,6 +413,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -405,6 +428,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -419,6 +443,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -433,6 +458,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -447,6 +473,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -461,6 +488,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -475,6 +503,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,
@@ -489,6 +518,7 @@ class NxText extends _NxTextBasic {
     super.color,
     super.decoration,
     super.fontStyle,
+    super.fontFamily,
     super.onPressed,
   }) : super(
     text,

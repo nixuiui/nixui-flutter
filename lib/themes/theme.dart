@@ -3,6 +3,8 @@ import 'package:yaru_color_generator/yaru_color_generator.dart';
 
 part '_colors.dart';
 part 'colors.dart';
+part '_text.dart';
+part 'text.dart';
 
 class NxTheme {
   NxTheme.setupBaseColor({
@@ -16,15 +18,15 @@ class NxTheme {
     Color? text,
     Color? border,
   }) {
-    _nxColor.primary = primary ?? _nxColor.primary;
-    _nxColor.secondary = secondary ?? _nxColor.secondary;
-    _nxColor.tertiary = tertiary ?? _nxColor.tertiary;
-    _nxColor.error = error ?? _nxColor.error;
-    _nxColor.warning = warning ?? _nxColor.warning;
-    _nxColor.info = info ?? _nxColor.info;
-    _nxColor.success = success ?? _nxColor.success;
-    _nxColor.text = text ?? _nxColor.text;
-    _nxColor.border = border ?? _nxColor.border;
+    _nxColor.primary ??= primary;
+    _nxColor.secondary ??= secondary;
+    _nxColor.tertiary ??= tertiary;
+    _nxColor.error ??= error;
+    _nxColor.warning ??= warning;
+    _nxColor.info ??= info;
+    _nxColor.success ??= success;
+    _nxColor.text ??= text;
+    _nxColor.border ??= border;
   }
   
   NxTheme.setupInputColor({
@@ -47,5 +49,11 @@ class NxTheme {
       disabledBackground: disabledBackground ?? _nxColor.input?.disabledBackground,
       border: border ?? _nxColor.input?.border,
     );
+  }
+
+  NxTheme.setupTextTheme({
+    String? fontFamily,
+  }) {
+    _nxTextTheme.fontFamily ??= fontFamily;
   }
 }
