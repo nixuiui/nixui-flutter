@@ -170,7 +170,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   }
 
   Color get getBorderColor {
-    var borderColor = this.borderColor ?? NxColor.border;
+    var borderColor = this.borderColor ?? NxInputFieldTheme.color.border!;
     if(errorText != '') {
       borderColor = NxColor.error;
     }
