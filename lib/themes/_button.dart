@@ -4,6 +4,7 @@ class _NxButtonTheme {
   double? width;
   double? height;
   EdgeInsetsGeometry? padding;
+  String? fontFamily;
   FontWeight? fontWeight;
   double? fontSize;
   double? radius;
@@ -19,6 +20,7 @@ class _NxButtonTheme {
     this.width,
     this.height,
     this.padding,
+    this.fontFamily,
     this.fontWeight,
     this.fontSize,
     this.radius,

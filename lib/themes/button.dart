@@ -2,6 +2,7 @@ part of 'theme.dart';
 
 var _nxButtonTheme = _NxButtonTheme(
   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 12),
+  fontFamily: null,
   fontWeight: FontWeight.w400,
   fontSize: 14,
   radius: 8,
@@ -35,6 +36,7 @@ var _nxButtonTheme = _NxButtonTheme(
 class NxButtonTheme {
   
   static EdgeInsetsGeometry get padding => _nxButtonTheme.padding!;
+  static String? get fontFamily => (_nxButtonTheme.fontFamily ?? _nxTextTheme.fontFamily);
   static FontWeight get fontWeight => _nxButtonTheme.fontWeight!;
   static double get fontSize => _nxButtonTheme.fontSize!;
   static double get radius => _nxButtonTheme.radius!;

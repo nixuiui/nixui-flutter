@@ -79,6 +79,7 @@ class NxTheme {
 
   NxTheme.setupButtonTheme({
     EdgeInsetsGeometry? padding,
+    String? fontFamily,
     FontWeight? fontWeight,
     double? fontSize,
     double? radius,
@@ -97,6 +98,7 @@ class NxTheme {
     Color? iconColor,
   }) {
     _nxButtonTheme.padding = padding ?? _nxButtonTheme.padding;
+    _nxButtonTheme.fontFamily = fontFamily ?? _nxButtonTheme.fontFamily;
     _nxButtonTheme.fontWeight = fontWeight ?? _nxButtonTheme.fontWeight;
     _nxButtonTheme.fontSize = fontSize ?? _nxButtonTheme.fontSize;
     _nxButtonTheme.radius = radius ?? _nxButtonTheme.radius;

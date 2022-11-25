@@ -61,6 +61,7 @@ class _NxButtonBasic extends StatelessWidget {
       color = NxButtonTheme.color.text!;
     }
 
+    var fontFamily = NxButtonTheme.fontFamily;
     var fontSize = this.fontSize ?? NxButtonTheme.fontSize;
     var fontWeight = this.fontWeight ?? NxButtonTheme.fontWeight;
     var borderSize = this.borderSize ?? NxButtonTheme.borderSize;
@@ -85,7 +86,8 @@ class _NxButtonBasic extends StatelessWidget {
           ),
           textTheme: TextTheme(
             bodyText1: TextStyle(
-              color: textColor
+              color: textColor,
+              fontFamily: fontFamily,
             )
           ),
         ),
@@ -107,6 +109,7 @@ class _NxButtonBasic extends StatelessWidget {
               color: textColor,
               fontSize: fontSize,
               fontWeight: fontWeight,
+              fontFamily: fontFamily,
             ),
             padding: padding,
             backgroundColor: color,
@@ -157,6 +160,7 @@ class _NxButtonBasic extends StatelessWidget {
                                 color: textColor,
                                 fontSize: fontSize,
                                 fontWeight: fontWeight,
+                                fontFamily: fontFamily,
                               ),
                             ),
                           ),
