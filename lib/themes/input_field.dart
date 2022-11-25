@@ -5,6 +5,7 @@ var _nxInputFieldTheme = _NxInputFieldTheme(
   underlinedPadding: EdgeInsets.symmetric(vertical: 12),
   dropdownPadding: EdgeInsets.symmetric(vertical: 7, horizontal: 16),
   dropdownUnderlinedPadding: EdgeInsets.symmetric(vertical: 7),
+  fontFamily: null,
   fontWeight: FontWeight.w400,
   fontSize: 14,
   radius: 8,
@@ -30,6 +31,7 @@ class NxInputFieldTheme {
   static EdgeInsetsGeometry get dropdownPadding => _nxInputFieldTheme.dropdownPadding!;
   static EdgeInsetsGeometry get dropdownUnderlinedPadding => _nxInputFieldTheme.dropdownUnderlinedPadding!;
   
+  static String get fontFamily => _nxInputFieldTheme.fontFamily!;
   static FontWeight get fontWeight => _nxInputFieldTheme.fontWeight!;
   static double get fontSize => _nxInputFieldTheme.fontSize!;
   static double get radius => _nxInputFieldTheme.radius!;

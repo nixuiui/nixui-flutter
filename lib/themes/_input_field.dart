@@ -5,6 +5,7 @@ class _NxInputFieldTheme {
   EdgeInsetsGeometry? underlinedPadding;
   EdgeInsetsGeometry? dropdownPadding;
   EdgeInsetsGeometry? dropdownUnderlinedPadding;
+  String? fontFamily;
   FontWeight? fontWeight;
   double? fontSize;
   double? radius;
@@ -18,6 +19,7 @@ class _NxInputFieldTheme {
     this.underlinedPadding,
     this.dropdownPadding,
     this.dropdownUnderlinedPadding,
+    this.fontFamily,
     this.fontWeight,
     this.fontSize,
     this.radius,

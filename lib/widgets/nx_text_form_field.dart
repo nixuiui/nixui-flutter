@@ -26,6 +26,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final Color? textColor, hintColor;
   final TextAlign? textAlign;
   final double? fontSize;
+  final String? fontFamily;
   final FontWeight? fontWeight;
   final Widget? prefix, suffix;
   final EdgeInsetsGeometry? prefixPadding, suffixPadding;
@@ -81,6 +82,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.hintColor,
     this.inputFormatters,
     this.fontSize,
+    this.fontFamily,
     this.fontWeight,
     this.inputAction,
     this.onFieldSubmitted,
@@ -140,12 +142,14 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
   TextStyle textStyle({Color? color}) {
     var lineHeight = this.lineHeight ?? (keyboardType == TextInputType.multiline ? 1.5 : 1);
+    var fontFamily = this.fontFamily ?? NxInputFieldTheme.fontFamily;
 
     return TextStyle(
       color: color,
       fontSize: getFontSize,
       fontWeight: getFontWeight,
       height: lineHeight,
+      fontFamily: fontFamily,
     );
   }
 

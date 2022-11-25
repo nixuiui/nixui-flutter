@@ -222,6 +222,7 @@ class _NxTextBasic extends StatelessWidget {
     }
 
     var color = this.color ?? defaultColor;
+    var fontFamily = this.fontFamily ?? NxTextTheme.fontFamily;
 
     var textStyle = nxTextStyle?.style(
       color: color,

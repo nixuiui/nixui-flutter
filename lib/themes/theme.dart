@@ -38,6 +38,7 @@ class NxTheme {
     EdgeInsetsGeometry? underlinedPadding,
     EdgeInsetsGeometry? dropdownPadding,
     EdgeInsetsGeometry? dropdownUnderlinedPadding,
+    String? fontFamily,
     FontWeight? fontWeight,
     double? fontSize,
     double? radius,
@@ -57,6 +58,7 @@ class NxTheme {
     _nxInputFieldTheme.underlinedPadding = underlinedPadding ?? _nxInputFieldTheme.underlinedPadding;
     _nxInputFieldTheme.dropdownUnderlinedPadding = dropdownUnderlinedPadding ?? _nxInputFieldTheme.dropdownUnderlinedPadding;
     _nxInputFieldTheme.dropdownPadding = dropdownPadding ?? _nxInputFieldTheme.dropdownPadding;
+    _nxInputFieldTheme.fontFamily = fontFamily ?? _nxInputFieldTheme.fontFamily;
     _nxInputFieldTheme.fontWeight = fontWeight ?? _nxInputFieldTheme.fontWeight;
     _nxInputFieldTheme.fontSize = fontSize ?? _nxInputFieldTheme.fontSize;
     _nxInputFieldTheme.radius = radius ?? _nxInputFieldTheme.radius;
