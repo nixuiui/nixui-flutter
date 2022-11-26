@@ -49,17 +49,16 @@ class _NxButtonBasic extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    var backgroundColor = color ?? NxButtonTheme.color.background!;
-    var disabledBackgroundColor = color?.light ?? NxButtonTheme.color.disabledBackground!;
+    var color = this.color ?? NxButtonTheme.color.background!;
     var textColor =  this.textColor ?? NxButtonTheme.color.text!;
     var iconColor = this.iconColor ?? NxButtonTheme.color.icon!;
-    var borderColor = this.borderColor ?? (color ?? NxButtonTheme.color.border!);
+    var borderColor = this.borderColor ?? (this.color ?? NxButtonTheme.color.border!);
 
     if(outlined) {
-      textColor =  this.textColor ?? backgroundColor;
+      textColor =  this.textColor ?? color;
       iconColor = this.iconColor ?? textColor;
-      borderColor = this.borderColor ?? backgroundColor;
-      backgroundColor = NxButtonTheme.color.text!;
+      borderColor = this.borderColor ?? color;
+      color = Colors.transparent;
     }
 
     var fontFamily = NxButtonTheme.fontFamily;
@@ -102,7 +101,7 @@ class _NxButtonBasic extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius),
               side: BorderSide(
-                color: !enabled ? disabledBackgroundColor : borderColor, 
+                color: !enabled ? borderColor.light : borderColor, 
                 width: borderSize
               ),
             ),
@@ -114,15 +113,15 @@ class _NxButtonBasic extends StatelessWidget {
             ),
             padding: padding,
             backgroundColor: color,
-            foregroundColor: backgroundColor.dark,
-            disabledBackgroundColor: disabledBackgroundColor,
+            foregroundColor: color.dark,
+            disabledBackgroundColor: color.light,
             splashFactory: NoSplash.splashFactory,
           ),
           child: isLoading 
               ? NxLoadingSpinner(
                   size: fontSize,
                   valueColor: textColor,
-                  backgroundColor: backgroundColor,
+                  backgroundColor: color,
                 ) 
               : (child != null) 
                     ? Center(
