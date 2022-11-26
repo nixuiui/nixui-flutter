@@ -40,8 +40,8 @@ class NxInputFieldTheme {
   static double get iconSize => _nxInputFieldTheme.iconSize!;
   static double get labelSpace => _nxInputFieldTheme.labelSpace!;
   static List<BoxShadow> get boxShadow => _nxInputFieldTheme.boxShadow!;
-  static Widget? get errorIcon => _nxInputFieldTheme.errorIcon!;
-  static Widget? get successIcon => _nxInputFieldTheme.successIcon!;
+  static Widget? get errorIcon => _nxInputFieldTheme.errorIcon;
+  static Widget? get successIcon => _nxInputFieldTheme.successIcon;
 
   static NxInputColor get color => NxInputColor(
     text: _nxInputFieldTheme.color!.text,
