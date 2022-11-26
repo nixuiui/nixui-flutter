@@ -12,6 +12,8 @@ class _NxInputFieldTheme {
   double? iconSize;
   double? labelSpace;
   List<BoxShadow>? boxShadow;
+  Widget? errorIcon;
+  Widget? successIcon;
   _NxInputColor? color;
 
   _NxInputFieldTheme({
@@ -26,6 +28,8 @@ class _NxInputFieldTheme {
     this.iconSize,
     this.labelSpace,
     this.boxShadow,
+    this.errorIcon,
+    this.successIcon,
     this.color,
   });
 }

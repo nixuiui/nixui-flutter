@@ -307,6 +307,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
 
     var textAlign = this.textAlign ?? TextAlign.start;
 
+    var errorIcon = this.errorIcon ?? NxInputFieldTheme.errorIcon;
+    var successIcon = this.successIcon ?? NxInputFieldTheme.successIcon;
+
     var inputDecoration = InputDecoration(
       contentPadding: getPadding,
       isCollapsed: true,
@@ -407,7 +410,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
                       size: getFontSize,
                     )
                   ), 
-                  child: errorIcon!
+                  child: errorIcon
                 ),
               ),
               NxText.extraSmall(
@@ -433,7 +436,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
                       size: getFontSize,
                     )
                   ), 
-                  child: successIcon!
+                  child: successIcon
                 ),
               ),
               NxText.extraSmall(

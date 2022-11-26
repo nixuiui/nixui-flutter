@@ -45,6 +45,8 @@ class NxTheme {
     double? iconSize,
     double? labelSpace,
     List<BoxShadow>? boxShadow,
+    Widget? errorIcon,
+    Widget? successIcon,
     Color? textColor,
     Color? hintTextColor,
     Color? suffixColor,
@@ -65,6 +67,8 @@ class NxTheme {
     _nxInputFieldTheme.iconSize = iconSize ?? _nxInputFieldTheme.iconSize;
     _nxInputFieldTheme.labelSpace = labelSpace ?? _nxInputFieldTheme.labelSpace;
     _nxInputFieldTheme.boxShadow = boxShadow ?? _nxInputFieldTheme.boxShadow;
+    _nxInputFieldTheme.errorIcon = errorIcon ?? _nxInputFieldTheme.errorIcon;
+    _nxInputFieldTheme.successIcon = successIcon ?? _nxInputFieldTheme.successIcon;
     _nxInputFieldTheme.color = _NxInputColor(
       text: textColor ?? _nxInputFieldTheme.color?.text,
       hintText: hintTextColor ?? _nxInputFieldTheme.color?.hintText,
