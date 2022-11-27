@@ -38,7 +38,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final Function(String)? onChanged;
   final Function(String)? onFieldSubmitted;
   final List<BoxShadow>? boxShadow;
-  final int? maxLines, minLines;
+  final int? maxLines, minLines, maxLength;
   final double? lineHeight;
   final MainAxisAlignment? valign;
   final bool? underlineBordered;
@@ -93,6 +93,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.boxShadow,
     this.maxLines = 1,
     this.minLines,
+    this.maxLength,
     this.lineHeight,
     this.valign,
     this.dropdownItems,
@@ -343,6 +344,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       validator: validator,
       maxLines: maxLines,
       minLines: minLines,
+      maxLength: maxLength,
       decoration: inputDecoration,
       textAlign: textAlign,
     );
@@ -512,6 +514,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.boxShadow,
     super.maxLines,
     super.minLines,
+    super.maxLength,
     super.lineHeight,
     super.valign,
     super.underlineBordered,
