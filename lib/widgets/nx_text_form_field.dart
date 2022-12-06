@@ -292,11 +292,14 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     var onTap = this.onTap;
     var controller = this.controller;
     
-    var date = initialDate ?? DateTime.now();
+    var date = initialDate;
     if(inputType == NxInputType.date) {
-      var dateString = '${date.year}/${date.month}/${date.day}';
-      if(dateValueText != null) {
-        dateString = dateValueText != null ? dateValueText!(date) : '';
+      var dateString = '';
+      if(date != null) {
+        dateString = '${date.year}/${date.month}/${date.day}';
+        if(dateValueText != null) {
+          dateString = dateValueText != null ? dateValueText!(date) : '';
+        }
       }
 
       controller = TextEditingController()..text = dateString;
@@ -452,10 +455,10 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     );
   }
 
-  Future<DateTime?> _getDate(BuildContext context, DateTime initialDate) async {
+  Future<DateTime?> _getDate(BuildContext context, DateTime? initialDate) async {
     final picker = await showDatePicker(
       context: context,
-      initialDate: initialDate,
+      initialDate: initialDate ?? DateTime.now(),
       firstDate: firstDate ?? DateTime(1950),
       lastDate: lastDate ?? DateTime.now(),
       builder: (context, child) {
