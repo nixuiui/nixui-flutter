@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:nixui/widgets/nixui.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ImagePickerScreen extends StatefulWidget {
   const ImagePickerScreen({ Key? key }) : super(key: key);
@@ -61,34 +62,41 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
           SizedBox(height: 16),
           AspectRatio(
             aspectRatio: 4/3,
-            child: NxImagePicker.camera(
-              onSelected: (file) => setState(() => image2 = file),
-              child: NxBox(
-                color: Colors.grey[100],
-                borderRadius: 8,
-                child: image2 != null 
-                    ? NxImage(
-                      radius: 8,
-                      size: double.infinity,
-                      image: FileImage(image2!),
-                    )
-                    : Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.camera_alt_rounded,
-                              size: 80,
-                              color: Colors.grey[300],
-                            ),
-                            SizedBox(height: 16),
-                            NxText.headline6(
-                              'Pick Photo From Camera',
-                              color: Colors.grey,
-                            ),
-                          ],
-                        )
-                      ),
+            child: NxBox(
+              borderRadius: 8,
+              color: Colors.grey[100],
+              child: NxPermissionHandlerWrapper(
+                description: 'Izinkan aplikasi mengakses Foto untuk menambahkan gambar',
+                permissions: const [
+                  Permission.camera,
+                  Permission.storage,
+                ],
+                child: NxImagePicker.camera(
+                  onSelected: (file) => setState(() => image2 = file),
+                  child: image2 != null 
+                      ? NxImage(
+                        radius: 8,
+                        size: double.infinity,
+                        image: FileImage(image2!),
+                      )
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.camera_alt_rounded,
+                                size: 80,
+                                color: Colors.grey[300],
+                              ),
+                              SizedBox(height: 16),
+                              NxText.headline6(
+                                'Pick Photo From Camera',
+                                color: Colors.grey,
+                              ),
+                            ],
+                          )
+                        ),
+                ),
               ),
             ),
           ),
