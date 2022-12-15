@@ -97,9 +97,11 @@ class NxToast extends StatelessWidget {
               )
             ),
           ),
-          NxText.extraSmall(
-            message ?? '',
-            color: textColor ?? Colors.white,
+          Expanded(
+            child: NxText.extraSmall(
+              message ?? '',
+              color: textColor ?? Colors.white,
+            ),
           ),
         ],
       ),
