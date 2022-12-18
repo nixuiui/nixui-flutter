@@ -44,7 +44,7 @@ class NxEmptyWidget extends StatelessWidget {
           ),
           if(title != null) Container(
             margin: EdgeInsets.only(bottom: 10),
-            child: NxText(
+            child: NxText.headline6(
               title!,
               textAlign: TextAlign.center,
               color: Colors.black87,
