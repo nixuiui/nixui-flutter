@@ -43,7 +43,6 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
             SizedBox(height: 16),
             NxTextFormField(
               label: NxText.small('Number'),
-              textColor: Colors.green,
               keyboardType: TextInputType.number,
             ),
             SizedBox(height: 16),

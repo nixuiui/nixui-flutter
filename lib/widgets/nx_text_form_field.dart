@@ -134,6 +134,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   }
 
   double get getBorderRadius {
+    if(underlineBordered == true) return 0;
     return borderRadius ?? NxInputFieldTheme.radius;
   }
 
