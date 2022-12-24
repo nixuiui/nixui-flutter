@@ -140,7 +140,7 @@ extension DoubleExtensions on Color {
   }
 
   Color get light {
-    const amount = 0.1;
+    const amount = 0.3;
 
     final hsl = HSLColor.fromColor(this);
     final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
