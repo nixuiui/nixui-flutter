@@ -97,7 +97,6 @@ class _NxButtonBasic extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             minimumSize: Size.zero,
             elevation: elevation,
-            shadowColor: Colors.transparent,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius),
               side: BorderSide(
