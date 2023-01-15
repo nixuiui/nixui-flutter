@@ -554,7 +554,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.underlineBordered,
     List<T>? items,
     T? value,
-    String Function(T)? valueLabel,
+    required String Function(T)? valueLabel,
     Function(T?)? onChanged,
   }) : super(
     inputType: NxInputType.dropdown,
