@@ -46,11 +46,11 @@ class NxButtonTheme {
   static double get fontSizeSmallButton => _nxButtonTheme.smallButton!.fontSize!;
   static EdgeInsetsGeometry get paddingSmallButton => _nxButtonTheme.smallButton!.padding!;
   
-  static double get fontSizeMediumButton => _nxButtonTheme.smallButton!.fontSize!;
-  static EdgeInsetsGeometry get paddingMediumButton => _nxButtonTheme.smallButton!.padding!;
+  static double get fontSizeMediumButton => _nxButtonTheme.mediumButton!.fontSize!;
+  static EdgeInsetsGeometry get paddingMediumButton => _nxButtonTheme.mediumButton!.padding!;
   
-  static double get fontSizeLargeButton => _nxButtonTheme.smallButton!.fontSize!;
-  static EdgeInsetsGeometry get paddingLargeButton => _nxButtonTheme.smallButton!.padding!;
+  static double get fontSizeLargeButton => _nxButtonTheme.largeButton!.fontSize!;
+  static EdgeInsetsGeometry get paddingLargeButton => _nxButtonTheme.largeButton!.padding!;
   
   static double get squareButtonSize => _nxButtonTheme.squareButton!.width!;
 
