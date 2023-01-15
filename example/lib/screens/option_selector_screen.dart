@@ -10,8 +10,8 @@ class OptionSelectorScreen extends StatefulWidget {
 
 class _OptionSelectorScreenState extends State<OptionSelectorScreen> {
 
-  NxOptions? selected;
-  List<NxOptions> selectedList = [];
+  String? selected;
+  List<String> selectedList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,14 @@ class _OptionSelectorScreenState extends State<OptionSelectorScreen> {
       ),
       body: ListView(
         children: [
-          NxOptionsSelector(
-            multipleSelect: true,
-            options: [
-              NxOptions(name: 'Niki', value: 'niki'),
-              NxOptions(name: 'Rahmadi', value: 'Rahmadi'),
-              NxOptions(name: 'Wiharto', value: 'Wiharto'),
+          NxOptionsSelector.multipleSelect(
+            options: const [
+              'Niki',
+              'Rahmadi',
+              'Wiharto',
             ],
             selected: selectedList,
+            valueLabel: (v) => v,
             label: 'Select',
             onSelected: (val) {
               setState(() {
@@ -48,12 +48,13 @@ class _OptionSelectorScreenState extends State<OptionSelectorScreen> {
           ),
           Divider(),
           NxOptionsSelector(
-            options: [
-              NxOptions(name: 'Niki', value: 'niki'),
-              NxOptions(name: 'Rahmadi', value: 'Rahmadi'),
-              NxOptions(name: 'Wiharto', value: 'Wiharto'),
+            options: const [
+              'Niki',
+              'Rahmadi',
+              'Wiharto',
             ],
             selected: selected,
+            valueLabel: (v) => v,
             label: 'Select',
             onSelected: (val) {
               setState(() {
@@ -65,7 +66,7 @@ class _OptionSelectorScreenState extends State<OptionSelectorScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  NxText('Single Select: **${selected?.name ?? ''}**'),
+                  NxText('Single Select: **${selected ?? ''}**'),
                   Icon(Icons.chevron_right)
                 ],
               ),
