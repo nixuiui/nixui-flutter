@@ -6,6 +6,7 @@ import 'package:nixui/widgets/nx_text.dart';
 enum NxInputType { 
   dropdown, 
   date, 
+  time, 
   stepper, 
 }
 
@@ -49,6 +50,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final DateTime? initialDate, firstDate, lastDate;
   final Function(DateTime?)? dateChanged;
   final String Function(DateTime)? dateValueText;
+  final TimeOfDay? initialTime;
+  final Function(TimeOfDay?)? timeChanged;
+  final String Function(TimeOfDay)? timeValueText;
   final Function()? onTap;
   
   const _NxTextFormFieldBasic({
@@ -105,6 +109,9 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.lastDate,
     this.dateChanged,
     this.dateValueText,
+    this.initialTime,
+    this.timeChanged,
+    this.timeValueText,
     this.onTap,
   }) :  assert(successText == '' || errorText ==''), 
         super(key: key);
@@ -310,6 +317,23 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       };
     }
 
+    var time = initialTime;
+    if(inputType == NxInputType.time) {
+      var timeString = '';
+      if(time != null) {
+        timeString = '${time.hour}:${time.minute}';
+        if(timeValueText != null) {
+          timeString = timeValueText != null ? timeValueText!(time) : '';
+        }
+      }
+
+      controller = TextEditingController()..text = timeString;
+      onTap = () async {
+        final newTime = await _getTime(context, time);
+        timeChanged?.call(newTime);
+      };
+    }
+
     var textAlign = this.textAlign ?? TextAlign.start;
 
     var errorIcon = this.errorIcon ?? NxInputFieldTheme.errorIcon;
@@ -462,6 +486,23 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       initialDate: initialDate ?? DateTime.now(),
       firstDate: firstDate ?? DateTime(1950),
       lastDate: lastDate ?? DateTime.now(),
+      builder: (context, child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(primary: NxColor.primary)
+          ),
+          child: child!,
+        );
+      }
+    );
+
+    return picker;
+  }
+
+  Future<TimeOfDay?> _getTime(BuildContext context, TimeOfDay? initialTime) async {
+    final picker = await showTimePicker(
+      context: context,
+      initialTime: initialTime ?? TimeOfDay.now(),
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
@@ -675,6 +716,43 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     readonly: true,
     dateChanged: onChanged,
     inputType: NxInputType.date,
+  );
+
+  const NxTextFormField.time({
+    super.key,
+    super.label,
+    super.labelSpace,
+    super.borderRadius,
+    super.padding,
+    super.prefix = const Icon(Icons.schedule),
+    super.prefixPadding,
+    super.prefixClicked,
+    super.suffix,
+    super.suffixPadding,
+    super.suffixClicked,
+    super.errorIcon,
+    super.successIcon,
+    super.hintText,
+    super.textAlign,
+    super.errorText,
+    super.successText,
+    super.backgroundColor,
+    super.borderColor,
+    super.textColor,
+    super.hintColor,
+    super.fontSize,
+    super.fontWeight,
+    super.focusNode,
+    super.enable,
+    Function(TimeOfDay?)? onChanged,
+    super.initialTime,
+    super.timeValueText,
+    super.boxShadow,
+    super.underlineBordered,
+  }) : super(
+    readonly: true,
+    timeChanged: onChanged,
+    inputType: NxInputType.time,
   );
 
 }

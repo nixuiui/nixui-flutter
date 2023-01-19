@@ -16,6 +16,7 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
   var controller = TextEditingController();
   var result = '';
   var date = DateTime.now();
+  var time = TimeOfDay.now();
 
   final options = <String>[
     'Messi',
@@ -52,6 +53,13 @@ class _FormFieldBasicScreenState extends State<FormFieldBasicScreen> {
               onChanged: (date) => setState(() => this.date = date ?? this.date),
               dateValueText: (date) => '${date.year}-${date.month}-${date.day}',
               lastDate: DateTime.now().add(Duration(days: 365)),
+            ),
+            SizedBox(height: 16),
+            NxTextFormField.time(
+              label: NxText.small('Time'),
+              initialTime: time,
+              onChanged: (time) => setState(() => this.time = time ?? this.time),
+              timeValueText: (time) => '${time.hourOfPeriod}:${time.minute} ${time.period.name}',
             ),
             SizedBox(height: 16),
             NxTextFormField(
