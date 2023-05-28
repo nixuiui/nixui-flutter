@@ -1,4 +1,5 @@
 import 'package:example/screens/form_field_basic.dart';
+import 'package:example/screens/form_field_underline.dart';
 import 'package:flutter/material.dart';
 import 'package:nixui/widgets/nx_text.dart';
 
@@ -17,6 +18,7 @@ class _FormFieldScreenState extends State<FormFieldScreen> {
       
       var menu = const [
         { 'title': 'Form Field Basic',  'screen': FormFieldBasicScreen()},
+        { 'title': 'Form Field Underlined',  'screen': FormFieldUnderlineScreen()},
       ];
 
     return Scaffold(
