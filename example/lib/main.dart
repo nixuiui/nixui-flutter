@@ -19,10 +19,12 @@ class MyApp extends StatelessWidget {
           color: NxColor.primary,
         ),
         scaffoldBackgroundColor: Colors.white,
-        backgroundColor: Colors.white,
         dividerTheme: const DividerThemeData(
           thickness: 0,
           space: 0
+        ), 
+        colorScheme: Theme.of(context).colorScheme.copyWith(
+          background: Colors.white
         )
       ),
       home: const HomeScreen(),

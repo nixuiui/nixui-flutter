@@ -42,7 +42,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final int? maxLines, minLines, maxLength;
   final double? lineHeight;
   final MainAxisAlignment? valign;
-  final bool? underlineBordered;
+  final bool? underline;
   final List<T>? dropdownItems;
   final T? dropdownValue;
   final String Function(T)? dropdownValueText;
@@ -79,7 +79,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.validator,
     this.borderRadius,
     this.backgroundColor,
-    this.underlineBordered = false,
+    this.underline = false,
     this.borderColor,
     this.textColor,
     this.textAlign,
@@ -117,12 +117,12 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
         super(key: key);
 
   EdgeInsetsGeometry get getPadding {
-    var defaultPadding = (underlineBordered ?? false) 
+    var defaultPadding = (underline ?? false) 
         ? NxInputFieldTheme.underlinedPadding 
         : NxInputFieldTheme.padding;
     
     if(inputType == NxInputType.dropdown) {
-      defaultPadding = (underlineBordered ?? false) 
+      defaultPadding = (underline ?? false) 
           ? NxInputFieldTheme.dropdownUnderlinedPadding 
           : NxInputFieldTheme.dropdownPadding;
     }
@@ -141,7 +141,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   }
 
   double get getBorderRadius {
-    if(underlineBordered == true) return 0;
+    if(underline == true) return 0;
     return borderRadius ?? NxInputFieldTheme.radius;
   }
 
@@ -170,7 +170,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       ),
     );
 
-    if(underlineBordered ?? false) {
+    if(underline ?? false) {
       border = UnderlineInputBorder(
         borderRadius: BorderRadius.circular(getBorderRadius),
         borderSide: BorderSide(
@@ -193,7 +193,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   Widget? get prefixIcon {
     var prefix = this.prefix;
     var padding = EdgeInsets.symmetric(horizontal: getPadding.horizontal/2);
-    if(underlineBordered ?? false) padding = EdgeInsets.only(right: 12);
+    if(underline ?? false) padding = EdgeInsets.only(right: 12);
     var prefixPadding = this.prefixPadding ?? padding;
 
     if(prefixClicked != null) {
@@ -220,7 +220,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   Widget? get suffixIcon {
     var suffix = this.suffix;
     var padding = EdgeInsets.symmetric(horizontal: getPadding.horizontal/2);
-    if(underlineBordered ?? false) padding = EdgeInsets.only(right: 12);
+    if(underline ?? false) padding = EdgeInsets.only(right: 12);
     var suffixPadding = this.suffixPadding ?? padding;
 
     if(suffixClicked != null) {
@@ -282,7 +282,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   Widget build(BuildContext context) {
 
     var backgroundColorDefault = NxInputFieldTheme.color.background;
-    if(underlineBordered ?? false) backgroundColorDefault = Colors.transparent;
+    if(underline ?? false) backgroundColorDefault = Colors.transparent;
     var backgroundColor = this.backgroundColor ?? backgroundColorDefault;
 
     var textColor = this.textColor ?? NxInputFieldTheme.color.text;
@@ -562,7 +562,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.maxLength,
     super.lineHeight,
     super.valign,
-    super.underlineBordered,
+    super.underline,
     super.onTap,
   }) : super();
 
@@ -592,7 +592,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.focusNode,
     super.enable,
     super.boxShadow,
-    super.underlineBordered,
+    super.underline,
     List<T>? items,
     T? value,
     required String Function(T)? valueLabel,
@@ -638,7 +638,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.minLines,
     super.lineHeight,
     super.valign,
-    super.underlineBordered
+    super.underline
   }) : super(
     inputType: NxInputType.stepper,
     keyboardType: TextInputType.number,
@@ -674,7 +674,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.maxLines = 6,
     super.minLines = 3,
     super.lineHeight,
-    super.underlineBordered
+    super.underline
   }) : super(
     keyboardType: TextInputType.multiline,
   );
@@ -711,7 +711,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.lastDate,
     super.dateValueText,
     super.boxShadow,
-    super.underlineBordered,
+    super.underline,
   }) : super(
     readonly: true,
     dateChanged: onChanged,
@@ -748,7 +748,7 @@ class NxTextFormField<T> extends _NxTextFormFieldBasic<T> {
     super.initialTime,
     super.timeValueText,
     super.boxShadow,
-    super.underlineBordered,
+    super.underline,
   }) : super(
     readonly: true,
     timeChanged: onChanged,

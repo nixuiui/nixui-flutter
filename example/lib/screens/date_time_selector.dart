@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:nixui/widgets/nixui.dart';
 import 'package:intl/intl.dart';
+import 'package:nixui/widgets/nixui.dart';
 
 class DateTimeSelectorScreen extends StatefulWidget {
   const DateTimeSelectorScreen({super.key});
@@ -11,8 +11,8 @@ class DateTimeSelectorScreen extends StatefulWidget {
 
 class _DateTimeSelectorScreenState extends State<DateTimeSelectorScreen> {
 
-  var startDate = DateTime.now();
-  var endDate = DateTime.now().add(Duration(days: 7));
+  var startDate = DateTime.now().add(Duration(days: -7));
+  var endDate = DateTime.now();
   var selectedDate = DateTime.now();
   var selectedTime = TimeOfDay.now();
 
