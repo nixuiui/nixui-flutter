@@ -21,6 +21,7 @@ class _NxButtonBasic extends StatelessWidget {
   final double? radius;
   final bool isLoading;
   final bool outlined;
+  final String? fontFamily;
   final Widget? child;
 
   const _NxButtonBasic({
@@ -43,6 +44,7 @@ class _NxButtonBasic extends StatelessWidget {
     this.radius,
     this.isLoading = false,
     this.outlined = false,
+    this.fontFamily,
     this.child,
   }) : super(key: key);
 
@@ -61,7 +63,7 @@ class _NxButtonBasic extends StatelessWidget {
       color = Colors.transparent;
     }
 
-    var fontFamily = NxButtonTheme.fontFamily;
+    var fontFamily = this.fontFamily ?? NxButtonTheme.fontFamily;
     var fontSize = this.fontSize ?? NxButtonTheme.fontSize;
     var fontWeight = this.fontWeight ?? NxButtonTheme.fontWeight;
     var borderSize = this.borderSize ?? NxButtonTheme.borderSize;
@@ -85,7 +87,7 @@ class _NxButtonBasic extends StatelessWidget {
             color: iconColor,
           ),
           textTheme: TextTheme(
-            bodyText1: TextStyle(
+            bodyLarge: TextStyle(
               color: textColor,
               fontFamily: fontFamily,
             )
@@ -146,7 +148,7 @@ class _NxButtonBasic extends StatelessWidget {
                               )
                             ), 
                             child: leftIcon!
-                          ) : SizedBox.shrink(),
+                          ) : const SizedBox.shrink(),
 
                           if(text != null) Container(
                             margin: EdgeInsets.only(
@@ -173,7 +175,7 @@ class _NxButtonBasic extends StatelessWidget {
                               )
                             ), 
                             child: rightIcon!
-                          ) : SizedBox.shrink(),
+                          ) : const SizedBox.shrink(),
 
                         ],
                       ),
@@ -204,6 +206,7 @@ class NxButton extends _NxButtonBasic {
     super.radius,
     super.isLoading,
     super.outlined,
+    super.fontFamily,
   });
   
   NxButton.small({
@@ -223,6 +226,7 @@ class NxButton extends _NxButtonBasic {
     super.radius = 4,
     super.isLoading,
     super.outlined,
+    super.fontFamily,
   }) : super(
     fontSize: NxButtonTheme.fontSizeSmallButton,
     padding: NxButtonTheme.paddingSmallButton,
@@ -245,6 +249,7 @@ class NxButton extends _NxButtonBasic {
     super.radius = 6,
     super.isLoading,
     super.outlined,
+    super.fontFamily,
   }) : super(
     fontSize: NxButtonTheme.fontSizeMediumButton,
     padding: NxButtonTheme.paddingMediumButton,
@@ -267,6 +272,7 @@ class NxButton extends _NxButtonBasic {
     super.radius = 10,
     super.isLoading,
     super.outlined,
+    super.fontFamily,
   }) : super(
     fontSize: NxButtonTheme.fontSizeLargeButton,
     padding: NxButtonTheme.paddingLargeButton,
@@ -286,6 +292,7 @@ class NxButton extends _NxButtonBasic {
     super.isLoading,
     super.outlined,
     super.child,
+    super.fontFamily,
     double? size,
     super.padding = EdgeInsets.zero,
   }) : super(

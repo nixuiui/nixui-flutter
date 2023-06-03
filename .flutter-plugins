@@ -1,7 +1,9 @@
 # This is a generated file; do not edit or check into version control.
-flutter_image_compress=/Users/asani/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_image_compress-1.1.3/
-image_pickers=/Users/asani/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/image_pickers-2.0.0+6/
-permission_handler=/Users/asani/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-10.2.0/
-permission_handler_android=/Users/asani/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-10.2.0/
-permission_handler_apple=/Users/asani/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_apple-9.0.7/
-permission_handler_windows=/Users/asani/Documents/Development/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_windows-0.1.2/
+flutter_image_compress=/Users/asani/.pub-cache/hosted/pub.dev/flutter_image_compress-2.0.3/
+flutter_image_compress_common=/Users/asani/.pub-cache/hosted/pub.dev/flutter_image_compress_common-1.0.1/
+flutter_image_compress_web=/Users/asani/.pub-cache/hosted/pub.dev/flutter_image_compress_web-0.1.3/
+image_pickers=/Users/asani/.pub-cache/hosted/pub.dev/image_pickers-2.0.4+1/
+permission_handler=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler-10.2.0/
+permission_handler_android=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.1/
+permission_handler_apple=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/
+permission_handler_windows=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.2/
