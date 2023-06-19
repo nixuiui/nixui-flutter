@@ -16,7 +16,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
   final double? labelSpace;
   final double? borderRadius;
   final EdgeInsetsGeometry? padding;
-  final Color? backgroundColor, borderColor;
+  final Color? backgroundColor, borderColor, focusedBorderColor;
   final FocusNode? focusNode;
   final TextEditingController? controller;
   final TextInputType keyboardType;
@@ -81,6 +81,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
     this.backgroundColor,
     this.underline = false,
     this.borderColor,
+    this.focusedBorderColor,
     this.textColor,
     this.textAlign,
     this.hintColor,
@@ -188,6 +189,11 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       borderColor = NxColor.error;
     }
     return borderColor;
+  }
+
+  Color get getFocusedBorderColor {
+    var focusedBorderColor = this.focusedBorderColor ?? NxColor.primary;
+    return focusedBorderColor;
   }
 
   Widget? get prefixIcon {
@@ -344,7 +350,7 @@ class _NxTextFormFieldBasic<T> extends StatelessWidget {
       isCollapsed: true,
       hintText: hintText,
       border: border(color: getBorderColor),
-      focusedBorder: border(color: NxColor.primary),
+      focusedBorder: border(color: getFocusedBorderColor),
       enabledBorder: border(color: getBorderColor),
       disabledBorder: border(color: getBorderColor),
       errorBorder: border(color: getBorderColor),
