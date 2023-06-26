@@ -12,11 +12,6 @@ dependencies:
     sdk: flutter
   yaru_color_generator: ^0.1.0
 
-  flutter_image_compress: ^2.0.3
-  image_pickers: ^2.0.4+1
-  image: ^4.0.17
-  permission_handler: ^10.2.0
-
 dev_dependencies:
   flutter_test:
     sdk: flutter

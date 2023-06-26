@@ -4,12 +4,11 @@ import 'package:example/screens/button.dart';
 import 'package:example/screens/card_screen.dart';
 import 'package:example/screens/color.dart';
 import 'package:example/screens/date_time_selector.dart';
-import 'package:example/screens/image_picker_screen.dart';
+import 'package:example/screens/form_field.dart';
 import 'package:example/screens/image_screen.dart';
 import 'package:example/screens/option_selector_screen.dart';
 import 'package:example/screens/selectable_list.dart';
 import 'package:example/screens/text.dart';
-import 'package:example/screens/form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:nixui/widgets/nx_text.dart';
 
@@ -34,7 +33,6 @@ class _HomeScreenState extends State<HomeScreen> {
         { 'title': 'Date Time Selector',  'screen': DateTimeSelectorScreen()},
         { 'title': 'Form Field',  'screen': FormFieldScreen()},
         { 'title': 'Image',  'screen': ImageScreen()},
-        { 'title': 'Image Picker',  'screen': ImagePickerScreen()},
         { 'title': 'Selectable List',  'screen': SelectableListScreen()},
         { 'title': 'Option Selector',  'screen': OptionSelectorScreen()},
         { 'title': 'Text',  'screen': TextScreen()},
