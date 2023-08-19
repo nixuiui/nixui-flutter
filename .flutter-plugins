@@ -1,9 +1,11 @@
 # This is a generated file; do not edit or check into version control.
-flutter_image_compress=/Users/asani/.pub-cache/hosted/pub.dev/flutter_image_compress-2.0.3/
-flutter_image_compress_common=/Users/asani/.pub-cache/hosted/pub.dev/flutter_image_compress_common-1.0.1/
-flutter_image_compress_web=/Users/asani/.pub-cache/hosted/pub.dev/flutter_image_compress_web-0.1.3/
-image_pickers=/Users/asani/.pub-cache/hosted/pub.dev/image_pickers-2.0.4+1/
-permission_handler=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler-10.2.0/
-permission_handler_android=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler_android-10.2.1/
-permission_handler_apple=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler_apple-9.0.8/
-permission_handler_windows=/Users/asani/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.2/
+file_picker=/Users/niki/.pub-cache/hosted/pub.dev/file_picker-5.3.3/
+flutter_image_compress=/Users/niki/.pub-cache/hosted/pub.dev/flutter_image_compress-2.0.4/
+flutter_image_compress_common=/Users/niki/.pub-cache/hosted/pub.dev/flutter_image_compress_common-1.0.2/
+flutter_image_compress_web=/Users/niki/.pub-cache/hosted/pub.dev/flutter_image_compress_web-0.1.3+1/
+flutter_plugin_android_lifecycle=/Users/niki/.pub-cache/hosted/pub.dev/flutter_plugin_android_lifecycle-2.0.15/
+image_pickers=/Users/niki/.pub-cache/hosted/pub.dev/image_pickers-2.0.4+1/
+permission_handler=/Users/niki/.pub-cache/hosted/pub.dev/permission_handler-10.4.3/
+permission_handler_android=/Users/niki/.pub-cache/hosted/pub.dev/permission_handler_android-10.3.3/
+permission_handler_apple=/Users/niki/.pub-cache/hosted/pub.dev/permission_handler_apple-9.1.4/
+permission_handler_windows=/Users/niki/.pub-cache/hosted/pub.dev/permission_handler_windows-0.1.3/

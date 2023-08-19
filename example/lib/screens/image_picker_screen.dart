@@ -61,15 +61,19 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
           ),
           SizedBox(height: 16),
           AspectRatio(
-            aspectRatio: 4/3,
+            aspectRatio: 3/3,
             child: NxBox(
               borderRadius: 8,
               color: Colors.grey[100],
               child: NxPermissionHandlerWrapper(
                 description: 'Izinkan aplikasi mengakses Foto untuk menambahkan gambar',
-                permissions: const [
+                permissions: [
                   Permission.camera,
-                  Permission.storage,
+                  if(Platform.isIOS) Permission.storage,
+                  if(Platform.isAndroid) ...[
+                    Permission.photos,
+                    Permission.videos,
+                  ]
                 ],
                 child: NxImagePicker.camera(
                   onSelected: (file) => setState(() => image2 = file),
