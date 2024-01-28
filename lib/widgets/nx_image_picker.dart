@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
-import 'package:image_pickers/image_pickers.dart';
 import 'package:image/image.dart' as img;
+import 'package:image_pickers/image_pickers.dart';
 
 enum NxImagePickerResource { gallery, camera }
 
@@ -15,6 +15,7 @@ class _NxImagePickerBasic extends StatelessWidget {
   final int sizeLimit;
   final bool showCamera;
   final NxImagePickerResource resource;
+  final bool withPreview;
 
   const _NxImagePickerBasic({ 
     Key? key,
@@ -24,6 +25,7 @@ class _NxImagePickerBasic extends StatelessWidget {
     this.sizeLimit = 2000000,
     this.showCamera = false,
     this.resource = NxImagePickerResource.gallery,
+    this.withPreview = false,
   }) : super(key: key);
 
   @override
@@ -31,23 +33,34 @@ class _NxImagePickerBasic extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         if(resource == NxImagePickerResource.gallery) {
-          await _pickImage(GalleryMode.image, (file) async {
-            if(withCompression) {
-              file = await compressImage(file, sizeLimit);
-            }
-            onSelected!.call(file);
-          });
+          await _pickImage(GalleryMode.image, (file) => imagePicked(file, context));
         } else if(resource == NxImagePickerResource.camera) {
-          await _takePicture((file) async {
-            if(withCompression) {
-              file = await compressImage(file, sizeLimit);
-            }
-            onSelected!.call(file);
-          });
+          await _takePicture((file) => imagePicked(file, context));
         }
       },
       child: child,
     );
+  }
+  
+  Future<void> imagePicked(File file, BuildContext context) async {
+    if(withCompression) {
+      file = await compressImage(file, sizeLimit);
+    }
+
+    if(withPreview) {
+      final result = await Navigator.push(
+        context, 
+        MaterialPageRoute(builder: (context) => _ImagePreviewScreen(file))
+      );
+
+      print('result: $result');
+
+      if(result != null) {
+        onSelected!.call(file);
+      }
+    } else {
+      onSelected!.call(file);
+    }
   }
 
   Future _pickImage(GalleryMode galleryMode, Function(File) onPick) async {
@@ -94,6 +107,31 @@ class _NxImagePickerBasic extends StatelessWidget {
   }
 }
 
+class _ImagePreviewScreen extends StatelessWidget {
+
+  final File file;
+  
+  const _ImagePreviewScreen(this.file);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(''),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.pop(context, {
+              'result': 'ok'
+            }), 
+            icon: Icon(Icons.check)
+          ),
+        ],
+      ),
+      body: Image(image: FileImage(file)),
+    );
+  }
+}
+
 class NxImagePicker extends _NxImagePickerBasic {
   
   const NxImagePicker.gallery({
@@ -102,6 +140,7 @@ class NxImagePicker extends _NxImagePickerBasic {
     super.withCompression,
     super.sizeLimit,
     super.showCamera,
+    super.withPreview,
     required super.child,
   }) : super(
     resource: NxImagePickerResource.gallery
@@ -112,6 +151,7 @@ class NxImagePicker extends _NxImagePickerBasic {
     super.onSelected,
     super.withCompression,
     super.sizeLimit,
+    super.withPreview,
     required super.child,
   }) : super(
     resource: NxImagePickerResource.camera

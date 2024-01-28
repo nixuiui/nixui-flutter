@@ -28,6 +28,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
           AspectRatio(
             aspectRatio: 4/3,
             child: NxImagePicker.gallery(
+              withPreview: true,
               onSelected: (file) => setState(() => image1 = file),
               showCamera: true,
               child: NxBox(
@@ -76,6 +77,7 @@ class _ImagePickerScreenState extends State<ImagePickerScreen> {
                   ]
                 ],
                 child: NxImagePicker.camera(
+                  withPreview: true,
                   onSelected: (file) => setState(() => image2 = file),
                   child: image2 != null 
                       ? NxImage(
